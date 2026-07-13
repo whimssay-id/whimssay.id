@@ -19,364 +19,193 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    font-family:'Poppins', sans-serif;
-    color:var(--ink);
-    background:var(--blush);
-    overflow-x:hidden;
-    font-weight:300;
-  }
-  h1,h2,h3,h4{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    line-height:1.15;
-  }
-  .script{
-    font-family:'Caveat', cursive;
-    font-weight:600;
-  }
+  body{font-family:'Poppins', sans-serif; color:var(--ink); background:var(--blush); overflow-x:hidden; font-weight:300;}
+  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:600; line-height:1.15;}
+  .script{font-family:'Caveat', cursive; font-weight:600;}
   a{text-decoration:none; color:inherit;}
   ul{list-style:none;}
   img{max-width:100%; display:block;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
 
-  /* ---------- scallop dividers (signature motif) ---------- */
-  .scallop-top, .scallop-bottom{
-    width:100%;
-    height:26px;
-    position:relative;
-  }
-  .scallop-top{
-    background-image: radial-gradient(circle at 13px 0, transparent 13px, var(--edge-color) 13.5px);
-    background-size:26px 26px;
-    background-repeat:repeat-x;
-    background-position:top;
-  }
-  .scallop-bottom{
-    background-image: radial-gradient(circle at 13px 26px, transparent 13px, var(--edge-color) 13.5px);
-    background-size:26px 26px;
-    background-repeat:repeat-x;
-    background-position:bottom;
-  }
+  .scallop-top, .scallop-bottom{width:100%; height:26px; position:relative;}
+  .scallop-top{background-image: radial-gradient(circle at 13px 0, transparent 13px, var(--edge-color) 13.5px); background-size:26px 26px; background-repeat:repeat-x; background-position:top;}
+  .scallop-bottom{background-image: radial-gradient(circle at 13px 26px, transparent 13px, var(--edge-color) 13.5px); background-size:26px 26px; background-repeat:repeat-x; background-position:bottom;}
 
-  /* ---------- nav ---------- */
-  header{
-    position:sticky; top:0; z-index:500;
-    background:rgba(252,235,241,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:2px dashed var(--rose);
-  }
-  nav.wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    padding-top:16px; padding-bottom:16px;
-    gap:12px;
-  }
-  .logo{
-    font-family:'Fraunces', serif;
-    font-size:1.6rem;
-    font-weight:700;
-    color:var(--rose);
-    letter-spacing:0.5px;
-  }
+  header{position:sticky; top:0; z-index:500; background:rgba(252,235,241,0.92); backdrop-filter:blur(6px); border-bottom:2px dashed var(--rose);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px; gap:12px;}
+  .logo{font-family:'Fraunces', serif; font-size:1.6rem; font-weight:700; color:var(--rose); letter-spacing:0.5px;}
   .logo span{color:var(--forest);}
-  .nav-links{
-    display:flex; gap:30px; align-items:center;
-    font-size:0.92rem; font-weight:500;
-  }
-  .nav-links a{
-    position:relative; padding:4px 2px;
-    transition:color 0.2s;
-  }
+  .nav-links{display:flex; gap:26px; align-items:center; font-size:0.9rem; font-weight:500;}
+  .nav-links a{position:relative; padding:4px 2px; transition:color 0.2s;}
   .nav-links a:hover{color:var(--rose);}
-  .nav-links a::after{
-    content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px;
-    background:var(--rose); transition:width 0.25s;
-  }
+  .nav-links a::after{content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--rose); transition:width 0.25s;}
   .nav-links a:hover::after{width:100%;}
   .nav-actions{display:flex; align-items:center; gap:10px;}
-  .switch-group{
-    display:flex; align-items:center; gap:6px;
-    background:rgba(255,255,255,0.6); border:1.5px dashed var(--forest);
-    border-radius:20px; padding:4px;
-  }
-  .switch-btn{
-    background:transparent; border:none; cursor:pointer;
-    font-family:'Poppins', sans-serif; font-size:0.78rem; font-weight:600;
-    color:var(--forest); padding:6px 10px; border-radius:16px; transition:all 0.2s;
-  }
+  .switch-group{display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.6); border:1.5px dashed var(--forest); border-radius:20px; padding:4px;}
+  .switch-btn{background:transparent; border:none; cursor:pointer; font-family:'Poppins', sans-serif; font-size:0.78rem; font-weight:600; color:var(--forest); padding:6px 10px; border-radius:16px; transition:all 0.2s;}
   .switch-btn.active{background:var(--forest); color:var(--cream);}
-  .cart-btn{
-    position:relative; background:var(--forest); color:var(--cream);
-    border:none; width:42px; height:42px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
-    transition:transform 0.2s;
-  }
+  .cart-btn{position:relative; background:var(--forest); color:var(--cream); border:none; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 0.2s;}
   .cart-btn:hover{transform:scale(1.08) rotate(-6deg);}
-  .cart-badge{
-    position:absolute; top:-4px; right:-4px; background:var(--rose); color:#fff;
-    font-size:0.65rem; font-weight:700; border-radius:50%;
-    width:18px; height:18px; display:flex; align-items:center; justify-content:center;
-  }
+  .cart-badge{position:absolute; top:-4px; right:-4px; background:var(--rose); color:#fff; font-size:0.65rem; font-weight:700; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center;}
   .burger{display:none; background:none; border:none; cursor:pointer; font-size:1.5rem; color:var(--forest);}
 
-  /* ---------- buttons ---------- */
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:13px 28px; border-radius:40px; font-weight:600; font-size:0.95rem;
-    cursor:pointer; border:2px solid transparent; transition:all 0.25s;
-  }
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:13px 28px; border-radius:40px; font-weight:600; font-size:0.95rem; cursor:pointer; border:2px solid transparent; transition:all 0.25s;}
   .btn-primary{background:var(--rose); color:#fff;}
   .btn-primary:hover{background:#b25a6b; transform:translateY(-2px);}
   .btn-outline{background:transparent; border-color:var(--forest); color:var(--forest);}
   .btn-outline:hover{background:var(--forest); color:#fff;}
   .btn-sage{background:var(--forest); color:var(--cream);}
   .btn-sage:hover{background:#3a5136;}
+  .btn:disabled{opacity:0.5; cursor:not-allowed;}
 
-  .eyebrow{
-    font-family:'Caveat', cursive; font-size:1.4rem; color:var(--rose); font-weight:700;
-    display:inline-block; margin-bottom:6px; transform:rotate(-2deg);
-  }
+  .eyebrow{font-family:'Caveat', cursive; font-size:1.4rem; color:var(--rose); font-weight:700; display:inline-block; margin-bottom:6px; transform:rotate(-2deg);}
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative; padding:70px 0 60px; background:var(--cream);
-    overflow:hidden;
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
-  }
-  .hero h1{
-    font-size:clamp(2.6rem, 5vw, 4.2rem);
-    color:var(--forest);
-  }
-  .hero h1 em{
-    font-style:italic; color:var(--rose);
-  }
-  .hero p.lead{
-    margin-top:18px; font-size:1.08rem; max-width:480px; color:#57503f;
-  }
+  .hero{position:relative; padding:70px 0 60px; background:var(--cream); overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  .hero h1{font-size:clamp(2.6rem, 5vw, 4.2rem); color:var(--forest);}
+  .hero h1 em{font-style:italic; color:var(--rose);}
+  .hero p.lead{margin-top:18px; font-size:1.08rem; max-width:480px; color:#57503f;}
   .hero-cta{display:flex; gap:16px; margin-top:32px; flex-wrap:wrap;}
-  .doodle{
-    position:absolute; font-size:2rem; opacity:0.8; animation:float 6s ease-in-out infinite;
-    user-select:none; pointer-events:none;
-  }
-  @keyframes float{
-    0%,100%{transform:translateY(0) rotate(0deg);}
-    50%{transform:translateY(-16px) rotate(8deg);}
-  }
-  .hero-visual{
-    position:relative; aspect-ratio:1/1; max-width:400px; margin:0 auto;
-    background:var(--pink);
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 0 3px var(--blush), 0 0 0 6px var(--rose);
-  }
+  .doodle{position:absolute; font-size:2rem; opacity:0.8; animation:float 6s ease-in-out infinite; user-select:none; pointer-events:none;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-16px) rotate(8deg);}}
+  .hero-visual{position:relative; aspect-ratio:1/1; max-width:400px; margin:0 auto; background:var(--pink); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px var(--blush), 0 0 0 6px var(--rose);}
   .hero-visual .hoop-content{font-size:5.5rem;}
-  .hero-visual::before{
-    content:'✂️'; position:absolute; top:8%; left:6%; font-size:1.8rem; transform:rotate(-15deg);
-  }
-  .hero-visual::after{
-    content:'🧵'; position:absolute; bottom:10%; right:8%; font-size:1.8rem; transform:rotate(10deg);
-  }
+  .hero-visual::before{content:'✂️'; position:absolute; top:8%; left:6%; font-size:1.8rem; transform:rotate(-15deg);}
+  .hero-visual::after{content:'🧵'; position:absolute; bottom:10%; right:8%; font-size:1.8rem; transform:rotate(10deg);}
 
-  /* ---------- section headings ---------- */
   .section{padding:80px 0;}
   .section-head{text-align:center; max-width:640px; margin:0 auto 50px;}
   .section-head h2{font-size:clamp(1.9rem, 3.6vw, 2.6rem); color:var(--forest);}
   .section-head p{margin-top:14px; color:#57503f; font-size:1rem;}
 
-  /* ---------- about ---------- */
   .about{background:var(--blush);}
-  .about-grid{
-    display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center;
-  }
-  .hoop{
-    width:100%; aspect-ratio:1/1; border-radius:50%;
-    border:14px solid var(--sage-light);
-    outline:3px dashed var(--forest);
-    outline-offset:-26px;
-    display:flex; align-items:center; justify-content:center;
-    background:var(--cream);
-    font-size:4.5rem;
-    position:relative;
-  }
+  .about-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center;}
+  .hoop{width:100%; aspect-ratio:1/1; border-radius:50%; border:14px solid var(--sage-light); outline:3px dashed var(--forest); outline-offset:-26px; display:flex; align-items:center; justify-content:center; background:var(--cream); font-size:4.5rem; position:relative;}
   .about-text h2{font-size:2rem; color:var(--forest); margin-bottom:18px;}
   .about-text p{margin-bottom:14px; color:#57503f; line-height:1.75;}
-  .value-row{
-    display:flex; flex-wrap:wrap; gap:14px; margin-top:26px;
-  }
-  .value-chip{
-    background:var(--sage-light); color:var(--forest); font-size:0.85rem; font-weight:600;
-    padding:9px 16px; border-radius:20px; display:flex; align-items:center; gap:6px;
-    border:1.5px dashed var(--forest);
-  }
+  .value-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:26px;}
+  .value-chip{background:var(--sage-light); color:var(--forest); font-size:0.85rem; font-weight:600; padding:9px 16px; border-radius:20px; display:flex; align-items:center; gap:6px; border:1.5px dashed var(--forest);}
 
-  /* ---------- products ---------- */
   .products{background:var(--cream);}
-  .product-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;
-  }
-  .card{
-    background:var(--blush);
-    border-radius:22px;
-    padding:22px;
-    border:2px dashed var(--rose);
-    position:relative;
-    transition:transform 0.25s, box-shadow 0.25s;
-  }
+  .product-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
+  .card{background:var(--blush); border-radius:22px; padding:22px; border:2px dashed var(--rose); position:relative; transition:transform 0.25s, box-shadow 0.25s;}
   .card:hover{transform:translateY(-6px) rotate(-0.6deg); box-shadow:0 14px 26px rgba(198,111,128,0.18);}
-  .card-visual{
-    height:150px; border-radius:16px; background:var(--pink);
-    display:flex; align-items:center; justify-content:center; font-size:3.4rem;
-    margin-bottom:16px;
-  }
-  .card-tag{
-    position:absolute; top:16px; right:16px; background:var(--forest); color:var(--cream);
-    font-size:0.68rem; font-weight:700; padding:4px 10px; border-radius:12px;
-    transform:rotate(4deg);
-  }
+  .card-visual{height:170px; border-radius:16px; background:var(--pink); display:flex; align-items:center; justify-content:center; font-size:3.4rem; margin-bottom:16px; overflow:hidden;}
+  .card-visual img{width:100%; height:100%; object-fit:cover;}
+  .card-tag{position:absolute; top:16px; right:16px; background:var(--forest); color:var(--cream); font-size:0.68rem; font-weight:700; padding:4px 10px; border-radius:12px; transform:rotate(4deg); z-index:2;}
   .card h3{font-size:1.15rem; color:var(--forest); margin-bottom:6px;}
   .card p.desc{font-size:0.86rem; color:#6b6355; margin-bottom:14px; min-height:38px;}
-  .card-footer{display:flex; align-items:center; justify-content:space-between;}
-  .price{font-weight:700; color:var(--rose); font-family:'Fraunces', serif; font-size:1.05rem;}
-  .qty-add{
-    background:var(--rose); color:#fff; border:none; width:38px; height:38px; border-radius:50%;
-    font-size:1.2rem; cursor:pointer; transition:transform 0.2s, background 0.2s;
-    display:flex; align-items:center; justify-content:center;
-  }
+  .card-footer{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .price{font-weight:700; color:var(--rose); font-family:'Fraunces', serif; font-size:1rem; line-height:1.4;}
+  .price small{display:block; font-family:'Poppins',sans-serif; font-weight:600; font-size:0.75rem; color:#8a8272;}
+  .qty-add{background:var(--rose); color:#fff; border:none; width:38px; height:38px; border-radius:50%; font-size:1.2rem; cursor:pointer; transition:transform 0.2s, background 0.2s; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
   .qty-add:hover{background:var(--forest); transform:scale(1.1);}
+  .sample-note{text-align:center; font-size:0.82rem; color:#8a8272; margin-top:26px; font-style:italic;}
 
-  /* ---------- how to order ---------- */
   .order-flow{background:var(--sage-light);}
-  .steps{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
-  }
-  .step{
-    background:var(--cream); border-radius:18px; padding:28px 24px; text-align:center;
-    border:2px solid var(--forest);
-  }
-  .step .num{
-    font-family:'Fraunces', serif; font-size:2.2rem; color:var(--rose); font-weight:700; margin-bottom:8px;
-  }
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .step{background:var(--cream); border-radius:18px; padding:28px 24px; text-align:center; border:2px solid var(--forest);}
+  .step .num{font-family:'Fraunces', serif; font-size:2.2rem; color:var(--rose); font-weight:700; margin-bottom:8px;}
   .step h4{color:var(--forest); margin-bottom:8px; font-size:1.05rem;}
   .step p{font-size:0.88rem; color:#57503f; line-height:1.6;}
-  .payment-note{
-    margin-top:38px; background:var(--cream); border:2px dashed var(--rose); border-radius:18px;
-    padding:22px 26px; display:flex; gap:18px; align-items:flex-start; max-width:760px; margin-left:auto; margin-right:auto;
-  }
+  .payment-note{margin-top:38px; background:var(--cream); border:2px dashed var(--rose); border-radius:18px; padding:22px 26px; display:flex; gap:18px; align-items:flex-start; max-width:760px; margin-left:auto; margin-right:auto;}
   .payment-note .qr-icon{font-size:2.4rem;}
   .payment-note p{font-size:0.9rem; color:#57503f; line-height:1.6;}
   .payment-note strong{color:var(--forest);}
 
-  /* ---------- testimonials ---------- */
   .testimonials{background:var(--blush);}
-  .testi-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
-  }
-  .testi-card{
-    background:var(--cream); border-radius:4px 18px 18px 4px; padding:24px 22px;
-    position:relative; box-shadow:4px 6px 0 rgba(198,111,128,0.25);
-    transform:rotate(-1deg);
-  }
-  .testi-card:nth-child(2n){transform:rotate(1deg);}
-  .testi-card p.quote{
-    font-family:'Caveat', cursive; font-size:1.35rem; color:var(--ink); line-height:1.4; margin-bottom:14px;
-  }
-  .testi-name{font-weight:600; font-size:0.85rem; color:var(--rose);}
-  .testi-loc{font-size:0.75rem; color:#8a8272;}
-  .stars{color:var(--rose); font-size:0.85rem; margin-bottom:8px;}
+  .coming-soon-card{background:var(--cream); border:2px dashed var(--rose); border-radius:22px; padding:44px 30px; text-align:center; max-width:480px; margin:0 auto;}
+  .coming-soon-card .emoji{font-size:2.4rem; margin-bottom:14px;}
+  .coming-soon-card p{color:#57503f; font-size:0.95rem; line-height:1.6;}
 
-  /* ---------- contact ---------- */
+  .tracking{background:var(--cream);}
+  .track-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .track-card{background:var(--blush); border:2px solid var(--forest); border-radius:18px; padding:26px;}
+  .track-card h4{color:var(--forest); margin-bottom:10px; font-size:1.05rem;}
+  .track-card p{font-size:0.85rem; color:#57503f; margin-bottom:14px; line-height:1.55;}
+  .track-card input{width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--sage); margin-bottom:12px; font-family:'Poppins',sans-serif; font-size:0.9rem; background:#fff;}
+  .track-result{margin-top:14px; font-size:0.85rem; background:#fff; border-radius:10px; padding:12px 14px; color:var(--ink); display:none;}
+  .track-result.show{display:block;}
+
   .contact{background:var(--forest); color:var(--cream);}
   .contact .section-head h2{color:var(--cream);}
   .contact .section-head p{color:var(--sage-light);}
-  .contact-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:50px;
-  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
   .socials{display:flex; gap:16px; margin-top:24px; flex-wrap:wrap;}
-  .social-btn{
-    display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.08);
-    border:1.5px solid var(--sage-light); padding:12px 18px; border-radius:30px;
-    font-size:0.9rem; font-weight:500; transition:background 0.2s;
-  }
+  .social-btn{display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.08); border:1.5px solid var(--sage-light); padding:12px 18px; border-radius:30px; font-size:0.9rem; font-weight:500; transition:background 0.2s;}
   .social-btn:hover{background:var(--rose);}
   .contact-info{margin-top:20px; font-size:0.92rem; color:var(--sage-light); line-height:2;}
   .form-box{background:var(--cream); border-radius:18px; padding:28px; color:var(--ink);}
   .form-box label{font-size:0.82rem; font-weight:600; color:var(--forest); display:block; margin-bottom:6px;}
-  .form-box input, .form-box textarea{
-    width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--sage);
-    margin-bottom:16px; font-family:'Poppins', sans-serif; font-size:0.9rem; background:#fff;
-  }
+  .form-box input, .form-box textarea, .form-box select{width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--sage); margin-bottom:16px; font-family:'Poppins', sans-serif; font-size:0.9rem; background:#fff;}
   .form-box textarea{resize:vertical; min-height:90px;}
 
-  footer{
-    background:var(--forest); color:var(--sage-light); text-align:center; padding:28px 0 34px; font-size:0.85rem;
-  }
+  footer{background:var(--forest); color:var(--sage-light); text-align:center; padding:28px 0 34px; font-size:0.85rem;}
   footer .logo-foot{font-family:'Fraunces', serif; color:var(--cream); font-size:1.2rem; margin-bottom:8px;}
-  footer .dev-link{
-    display:inline-block; margin-top:12px; font-size:0.72rem; color:var(--sage-light); opacity:0.55;
-    border-bottom:1px dashed var(--sage-light);
-  }
+  footer .dev-link{display:inline-block; margin-top:12px; font-size:0.72rem; color:var(--sage-light); opacity:0.55; border-bottom:1px dashed var(--sage-light);}
   footer .dev-link:hover{opacity:1;}
 
-  /* ---------- cart drawer ---------- */
-  .overlay{
-    position:fixed; inset:0; background:rgba(60,54,48,0.4); z-index:900; opacity:0; pointer-events:none; transition:opacity 0.3s;
-  }
+  .overlay{position:fixed; inset:0; background:rgba(60,54,48,0.45); z-index:900; opacity:0; pointer-events:none; transition:opacity 0.3s;}
   .overlay.active{opacity:1; pointer-events:auto;}
-  .cart-drawer{
-    position:fixed; top:0; right:-420px; width:380px; max-width:88vw; height:100%;
-    background:var(--blush); z-index:950; box-shadow:-4px 0 20px rgba(0,0,0,0.15);
-    transition:right 0.35s ease; display:flex; flex-direction:column;
-  }
+  .cart-drawer{position:fixed; top:0; right:-420px; width:380px; max-width:88vw; height:100%; background:var(--blush); z-index:950; box-shadow:-4px 0 20px rgba(0,0,0,0.15); transition:right 0.35s ease; display:flex; flex-direction:column;}
   .cart-drawer.active{right:0;}
-  .cart-head{
-    padding:22px 24px; border-bottom:2px dashed var(--rose); display:flex; justify-content:space-between; align-items:center;
-  }
+  .cart-head{padding:22px 24px; border-bottom:2px dashed var(--rose); display:flex; justify-content:space-between; align-items:center;}
   .cart-head h3{color:var(--forest);}
   .cart-close{background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--rose);}
   .cart-items{flex:1; overflow-y:auto; padding:18px 24px;}
-  .cart-item{
-    display:flex; gap:12px; align-items:center; margin-bottom:16px; background:#fff; padding:12px; border-radius:14px;
-  }
-  .cart-item .ci-icon{font-size:1.8rem;}
+  .cart-item{display:flex; gap:12px; align-items:center; margin-bottom:16px; background:#fff; padding:12px; border-radius:14px;}
+  .cart-item .ci-icon{font-size:1.6rem; width:36px; height:36px; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--pink); flex-shrink:0;}
+  .cart-item .ci-icon img{width:100%; height:100%; object-fit:cover;}
   .cart-item .ci-info{flex:1;}
   .cart-item .ci-info h5{font-size:0.9rem; color:var(--forest);}
   .cart-item .ci-info span{font-size:0.78rem; color:#8a8272;}
   .ci-controls{display:flex; align-items:center; gap:8px;}
-  .ci-controls button{
-    width:24px; height:24px; border-radius:50%; border:1px solid var(--rose); background:#fff; color:var(--rose);
-    cursor:pointer; font-size:0.9rem; line-height:1;
-  }
+  .ci-controls button{width:24px; height:24px; border-radius:50%; border:1px solid var(--rose); background:#fff; color:var(--rose); cursor:pointer; font-size:0.9rem; line-height:1;}
   .empty-cart{text-align:center; color:#8a8272; padding:40px 10px; font-size:0.9rem;}
   .cart-footer{padding:20px 24px; border-top:2px dashed var(--rose);}
   .cart-total{display:flex; justify-content:space-between; font-weight:600; color:var(--forest); margin-bottom:14px;}
   .cart-footer .btn{width:100%; justify-content:center;}
 
-  .toast{
-    position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px);
-    background:var(--forest); color:var(--cream); padding:12px 22px; border-radius:30px;
-    font-size:0.88rem; z-index:1000; opacity:0; transition:all 0.3s; pointer-events:none;
-  }
+  /* checkout modal */
+  .modal-overlay{position:fixed; inset:0; background:rgba(60,54,48,0.5); z-index:1200; opacity:0; pointer-events:none; transition:opacity 0.3s; display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:40px 16px;}
+  .modal-overlay.active{opacity:1; pointer-events:auto;}
+  .modal-box{background:var(--blush); border-radius:22px; max-width:520px; width:100%; padding:30px; position:relative; margin:auto;}
+  .modal-close{position:absolute; top:18px; right:20px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--rose);}
+  .modal-box h3{color:var(--forest); font-size:1.4rem; margin-bottom:6px;}
+  .modal-box .sub{font-size:0.85rem; color:#6b6355; margin-bottom:20px;}
+  .modal-box label{font-size:0.8rem; font-weight:600; color:var(--forest); display:block; margin-bottom:5px; margin-top:14px;}
+  .modal-box label:first-of-type{margin-top:0;}
+  .modal-box input, .modal-box select, .modal-box textarea{width:100%; padding:10px 13px; border-radius:10px; border:1.5px solid var(--sage); font-family:'Poppins', sans-serif; font-size:0.88rem; background:#fff;}
+  .modal-box textarea{resize:vertical; min-height:60px;}
+  .pay-options{display:flex; gap:10px; margin-top:8px;}
+  .pay-opt{flex:1; border:2px solid var(--sage); border-radius:14px; padding:12px; text-align:center; cursor:pointer; font-size:0.85rem; font-weight:600; color:var(--forest); transition:all 0.2s;}
+  .pay-opt.active{border-color:var(--rose); background:var(--pink);}
+  .checkout-summary{background:#fff; border-radius:14px; padding:14px 16px; margin-top:16px; font-size:0.85rem;}
+  .checkout-summary .row{display:flex; justify-content:space-between; margin-bottom:6px;}
+  .checkout-summary .row.total{font-weight:700; color:var(--forest); border-top:1px dashed var(--sage); padding-top:8px; margin-top:8px;}
+  .success-box{text-align:center;}
+  .success-box .emoji{font-size:2.6rem; margin-bottom:10px;}
+  .order-id-chip{display:inline-block; background:var(--forest); color:var(--cream); font-family:monospace; font-size:0.95rem; padding:8px 16px; border-radius:10px; margin:10px 0;}
+  .pay-block{background:#fff; border-radius:14px; padding:16px; margin-top:16px; text-align:left; font-size:0.85rem; line-height:1.6;}
+  .pay-block img{border-radius:10px; margin-top:8px; max-width:220px;}
+  .success-actions{display:flex; flex-direction:column; gap:10px; margin-top:18px;}
+  .success-actions .btn{width:100%; justify-content:center;}
+
+  .toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--forest); color:var(--cream); padding:12px 22px; border-radius:30px; font-size:0.88rem; z-index:1000; opacity:0; transition:all 0.3s; pointer-events:none;}
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
   @media (max-width:900px){
-    .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
+    .hero-grid, .about-grid, .contact-grid, .track-grid{grid-template-columns:1fr;}
     .about-grid{gap:36px;}
     .hoop{max-width:280px; margin:0 auto;}
-    .product-grid, .steps, .testi-grid{grid-template-columns:repeat(2,1fr);}
-    .nav-links{
-      position:fixed; top:73px; left:0; right:0; background:var(--blush); flex-direction:column;
-      padding:20px 28px; gap:18px; border-bottom:2px dashed var(--rose);
-      transform:translateY(-150%); transition:transform 0.3s; z-index:400;
-    }
+    .product-grid, .steps{grid-template-columns:repeat(2,1fr);}
+    .nav-links{position:fixed; top:73px; left:0; right:0; background:var(--blush); flex-direction:column; padding:20px 28px; gap:18px; border-bottom:2px dashed var(--rose); transform:translateY(-150%); transition:transform 0.3s; z-index:400;}
     .nav-links.open{transform:translateY(0);}
     .burger{display:block;}
   }
   @media (max-width:600px){
-    .product-grid, .steps, .testi-grid{grid-template-columns:1fr;}
+    .product-grid, .steps{grid-template-columns:1fr;}
     .section{padding:56px 0;}
-    .switch-group{transform:scale(0.9);}
   }
   @media (prefers-reduced-motion: reduce){
     .doodle{animation:none;}
@@ -394,17 +223,13 @@
       <li><a href="#tentang" data-i18n="nav_about">Tentang</a></li>
       <li><a href="#koleksi" data-i18n="nav_shop">Koleksi</a></li>
       <li><a href="#cara-order" data-i18n="nav_how">Cara Order</a></li>
-      <li><a href="#testimoni" data-i18n="nav_reviews">Testimoni</a></li>
+      <li><a href="#lacak" data-i18n="nav_track">Lacak Pesanan</a></li>
       <li><a href="#kontak" data-i18n="nav_contact">Kontak</a></li>
     </ul>
     <div class="nav-actions">
       <div class="switch-group" role="group" aria-label="Language">
         <button class="switch-btn active" id="langID" onclick="setLang('id')">ID</button>
         <button class="switch-btn" id="langEN" onclick="setLang('en')">EN</button>
-      </div>
-      <div class="switch-group" role="group" aria-label="Currency">
-        <button class="switch-btn active" id="curIDR" onclick="setCurrency('IDR')">Rp</button>
-        <button class="switch-btn" id="curUSD" onclick="setCurrency('USD')">$</button>
       </div>
       <button class="cart-btn" onclick="toggleCart(true)" aria-label="Buka keranjang">
         🛍️<span class="cart-badge" id="cartBadge">0</span>
@@ -430,9 +255,7 @@
         <a href="#tentang" class="btn btn-outline" data-i18n="hero_cta2">Kenalan dulu yuk</a>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hoop-content">🧸🌷</div>
-    </div>
+    <div class="hero-visual"><div class="hoop-content">🧸🌷</div></div>
   </div>
 </section>
 <div class="scallop-bottom" style="--edge-color:var(--blush); background-color:var(--cream);"></div>
@@ -466,6 +289,7 @@
       <p data-i18n="shop_sub">Semua item ready stock terbatas — begitu habis, nunggu batch berikutnya ya, sayang!</p>
     </div>
     <div class="product-grid" id="productGrid"></div>
+    <p class="sample-note" data-i18n="sample_note">🌱 Ini contoh produk — admin bisa ganti foto & isi lewat halaman Developer.</p>
   </div>
 </section>
 <div class="scallop-bottom" style="--edge-color:var(--sage-light); background-color:var(--blush);"></div>
@@ -476,7 +300,7 @@
     <div class="section-head">
       <span class="eyebrow" data-i18n="how_eyebrow">gampang kok</span>
       <h2 data-i18n="how_title">Cara order di Whimssay</h2>
-      <p data-i18n="how_sub">Order langsung dari website ini, lalu kami bantu proses sampai ke tanganmu.</p>
+      <p data-i18n="how_sub">Order, isi alamat, dan bayar — semuanya langsung dari website ini.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -486,18 +310,18 @@
       </div>
       <div class="step">
         <div class="num">02</div>
-        <h4 data-i18n="step2_h">Checkout via WhatsApp</h4>
-        <p data-i18n="step2_p">Klik "Checkout Sekarang", pesananmu otomatis tersusun rapi dan terkirim ke admin via WhatsApp.</p>
+        <h4 data-i18n="step2_h">Isi data pengiriman</h4>
+        <p data-i18n="step2_p">Klik "Checkout Sekarang", isi nama, alamat, dan no. telepon. Ongkir estimasi J&T langsung terhitung.</p>
       </div>
       <div class="step">
         <div class="num">03</div>
-        <h4 data-i18n="step3_h">Bayar & tunggu paket tiba</h4>
-        <p data-i18n="step3_p">Admin kirim total & kode QRIS untuk pembayaran. Setelah dikonfirmasi, paket dikirim via ekspedisi rekanan (JNE/J&T/SiCepat).</p>
+        <h4 data-i18n="step3_h">Bayar & lacak paket</h4>
+        <p data-i18n="step3_p">Pilih bayar QRIS (Rp) atau PayPal ($). Pesanan otomatis kami terima, lalu kamu bisa lacak status pengiriman di bagian Lacak Pesanan.</p>
       </div>
     </div>
     <div class="payment-note">
       <div class="qr-icon">🔳</div>
-      <p data-i18n-html="payment_note"><strong>Pembayaran:</strong> khusus QRIS untuk saat ini (scan &amp; bayar dari e-wallet atau m-banking apa saja). Kode QRIS dikirimkan admin setelah pesananmu dikonfirmasi.<br><strong>Pengiriman:</strong> menggunakan jasa ekspedisi pihak ketiga, ongkir menyesuaikan berat & lokasi tujuan.</p>
+      <p data-i18n-html="payment_note"><strong>Pembayaran:</strong> QRIS (Rupiah) atau PayPal (USD), pilih saat checkout.<br><strong>Pengiriman:</strong> J&T Express, ongkir yang muncul saat checkout adalah estimasi berdasarkan wilayah — nominal final dikonfirmasi admin sebelum paket dikirim.</p>
     </div>
   </div>
 </section>
@@ -508,9 +332,39 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow" data-i18n="testi_eyebrow">kata mereka</span>
-      <h2 data-i18n="testi_title">Cerita manis dari pelanggan Whimssay</h2>
+      <h2 data-i18n="testi_title">Cerita dari pelanggan Whimssay</h2>
     </div>
-    <div class="testi-grid" id="testiGrid"></div>
+    <div class="coming-soon-card">
+      <div class="emoji">🌱</div>
+      <p data-i18n="testi_soon">Belum ada testimoni — toko ini baru dibuka! Jadilah pelanggan pertama yang cerita pengalamannya di sini.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKING -->
+<div class="scallop-top" style="--edge-color:var(--blush); background-color:var(--cream);"></div>
+<section class="tracking section" id="lacak">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="track_eyebrow">lacak pesanan</span>
+      <h2 data-i18n="track_title">Cek status pesanan & paketmu</h2>
+      <p data-i18n="track_sub">Simpan Order ID yang kamu dapat setelah checkout ya, biar gampang dicek lagi.</p>
+    </div>
+    <div class="track-grid">
+      <div class="track-card">
+        <h4 data-i18n="track_order_h">Cek status pesanan</h4>
+        <p data-i18n="track_order_p">Masukkan Order ID kamu (contoh: WMS-ABC123). Ini akan mencari data di perangkat yang sama saat kamu checkout.</p>
+        <input type="text" id="trackOrderId" placeholder="WMS-XXXXXX">
+        <button class="btn btn-outline" onclick="lookupOrder()" data-i18n="track_order_btn">Cek Sekarang</button>
+        <div class="track-result" id="trackOrderResult"></div>
+      </div>
+      <div class="track-card">
+        <h4 data-i18n="track_jnt_h">Lacak paket J&T</h4>
+        <p data-i18n="track_jnt_p">Setelah paketmu dikirim, admin akan mengirim nomor resi J&T lewat WhatsApp/email. Tempel nomor resi itu di sini, lalu lacak langsung di situs resmi J&T.</p>
+        <input type="text" id="trackResi" placeholder="Nomor resi J&T">
+        <button class="btn btn-outline" onclick="trackJnt()" data-i18n="track_jnt_btn">Lacak di J&T</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -526,14 +380,14 @@
       <div>
         <h3 style="color:var(--pink); margin-bottom:10px;" data-i18n="social_h">Sosial media</h3>
         <div class="socials">
-          <a class="social-btn" href="https://wa.me/6281234567890" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="social-btn" href="https://wa.me/6285706023066" target="_blank" rel="noopener">💬 WhatsApp</a>
           <a class="social-btn" href="https://instagram.com/whimssay.id" target="_blank" rel="noopener">📸 Instagram</a>
           <a class="social-btn" href="https://tiktok.com/@whimssay.id" target="_blank" rel="noopener">🎵 TikTok</a>
-          <a class="social-btn" href="mailto:hello@whimssay.id">✉️ Email</a>
+          <a class="social-btn" href="mailto:whimssayid@gmail.com">✉️ Email</a>
         </div>
         <div class="contact-info" data-i18n-html="contact_info">
-          WhatsApp: +62 812-3456-7890<br>
-          Email: hello@whimssay.id<br>
+          WhatsApp: +62 857-0602-3066<br>
+          Email: whimssayid@gmail.com<br>
           Instagram &amp; TikTok: @whimssay.id<br>
           Jam operasional: Senin–Sabtu, 09.00–20.00 WIB
         </div>
@@ -570,38 +424,46 @@
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer">
     <div class="cart-total"><span data-i18n="cart_total">Total</span><span id="cartTotal">Rp 0</span></div>
-    <button class="btn btn-primary" onclick="checkoutWA()" data-i18n="cart_checkout">Checkout Sekarang</button>
+    <button class="btn btn-primary" onclick="openCheckout()" data-i18n="cart_checkout">Checkout Sekarang</button>
   </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal-box" id="checkoutBox"></div>
 </div>
 
 <div class="toast" id="toast" data-i18n="toast_added">Ditambahkan ke keranjang 💌</div>
 
 <script>
-  /* ============ DEFAULT PRODUCTS ============
-     To permanently add a product for every visitor, add an object here
-     (or paste the snippet exported from admin.html) and re-deploy to GitHub. */
-  const defaultProducts = [
-    {id:'p1', name:'Scrunchie Rajut "Petal"', name_en:'Knit Scrunchie "Petal"', desc:'Scrunchie rajutan motif bunga, lembut & elastis.', desc_en:'Hand-knit floral scrunchie, soft & stretchy.', price:35000, icon:'🎀', tag:'Best Seller', tag_en:'Best Seller'},
-    {id:'p2', name:'Gantungan Kunci Resin "Little Bloom"', name_en:'Resin Keychain "Little Bloom"', desc:'Resin handmade dengan bunga kering asli di dalamnya.', desc_en:'Handmade resin charm with real dried flowers inside.', price:45000, icon:'🔑', tag:'Favorit', tag_en:'Fan Favorite'},
-    {id:'p3', name:'Jepit Rambut Mutiara "Dainty"', name_en:'Pearl Hair Clips "Dainty"', desc:'Set jepit mutiara mini, manis buat sehari-hari.', desc_en:'Mini pearl clip set, sweet for everyday wear.', price:38000, icon:'🎗️', tag:'New', tag_en:'New'},
-    {id:'p4', name:'Tote Bag Lukis Tangan "Garden Diary"', name_en:'Hand-Painted Tote "Garden Diary"', desc:'Tote canvas dilukis tangan motif taman bunga.', desc_en:'Canvas tote hand-painted with a garden motif.', price:120000, icon:'👜', tag:'Limited', tag_en:'Limited'},
-    {id:'p5', name:'Sticker Pack "Whimsy Doodles"', name_en:'Sticker Pack "Whimsy Doodles"', desc:'10 sticker vinyl doodle lucu tahan air.', desc_en:'10 cute waterproof vinyl doodle stickers.', price:20000, icon:'✨', tag:'Murmer', tag_en:'Budget Pick'},
-    {id:'p6', name:'Pouch Rajutan "Clover"', name_en:'Knit Pouch "Clover"', desc:'Pouch rajut mungil untuk simpan receh atau lipstik.', desc_en:'Tiny knit pouch for coins or lipstick.', price:55000, icon:'👛', tag:'Handmade', tag_en:'Handmade'},
-  ];
+  /* ============ CONFIG — edit these before/after deploying ============ */
+  const WA_NUMBER = '6285706023066';               // admin WhatsApp (checkout fallback + contact form)
+  const ADMIN_EMAIL = 'whimssayid@gmail.com';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID'; // see README
+  const PAYPAL_USERNAME = 'whimssayid';             // your paypal.me username — replace with the real one
+  const QRIS_IMAGE = '';                            // e.g. 'qris.jpg' if you upload your static QRIS image to the repo
+  const USD_RATE = 15800;                           // approximate fixed IDR-per-USD rate, update as needed
 
-  const testimonials = [
-    {name:'Kirana', loc:'Bandung', quote:'Scrunchie-nya lucu banget dan beneran kerasa handmade, packaging-nya juga estetik parah!', quote_en:'The scrunchie is so cute and genuinely feels handmade — the packaging is gorgeous too!'},
-    {name:'Naura', loc:'Jakarta', quote:'Gantungan kunci resinnya jadi mood booster tiap buka tas. Bakal repeat order sih ini.', quote_en:'The resin keychain is a mood booster every time I open my bag. Definitely ordering again.'},
-    {name:'Aisyah', loc:'Yogyakarta', quote:'Admin ramah, fast respon, tote bag-nya bagus banget buat dipake kuliah tiap hari.', quote_en:'Admin was friendly and fast to reply, the tote bag is great for daily campus use.'},
-    {name:'Salsa', loc:'Surabaya', quote:'Suka banget sama konsep whimsical-nya, beda dari toko lain. Worth every rupiah!', quote_en:'Love the whimsical concept, so different from other shops. Worth every rupiah!'},
-    {name:'Devi', loc:'Semarang', quote:'Sticker pack-nya kualitas oke, warnanya cerah dan gak gampang pudar.', quote_en:'The sticker pack quality is great, colors are bright and don\'t fade easily.'},
-    {name:'Rania', loc:'Medan', quote:'Checkout gampang banget langsung dari web, prosesnya cepat sampai barang diterima.', quote_en:'Checkout was so easy right from the website, fast process from order to delivery.'},
+  const shippingZones = {
+    jabodetabek:{label_id:'Jabodetabek', label_en:'Jabodetabek (Jakarta area)', rate:12000},
+    jawa:{label_id:'Jawa (luar Jabodetabek)', label_en:'Java (outside Jabodetabek)', rate:18000},
+    sumatera:{label_id:'Sumatera', label_en:'Sumatra', rate:25000},
+    kalisulteng:{label_id:'Kalimantan / Sulawesi', label_en:'Kalimantan / Sulawesi', rate:30000},
+    timur:{label_id:'Indonesia Timur & lainnya', label_en:'Eastern Indonesia & others', rate:38000},
+  };
+
+  /* ============ DEFAULT PRODUCTS ============
+     Two examples only — replace with your real products & photos via admin.html,
+     then paste the exported snippet here so every visitor sees them. */
+  const defaultProducts = [
+    {id:'p1', name:'Scrunchie Rajut "Petal"', name_en:'Knit Scrunchie "Petal"', desc:'Scrunchie rajutan motif bunga, lembut & elastis.', desc_en:'Hand-knit floral scrunchie, soft & stretchy.', price:35000, image:'', icon:'🎀', tag:'Contoh', tag_en:'Example'},
+    {id:'p2', name:'Gantungan Kunci Resin "Little Bloom"', name_en:'Resin Keychain "Little Bloom"', desc:'Resin handmade dengan bunga kering asli di dalamnya.', desc_en:'Handmade resin charm with real dried flowers inside.', price:45000, image:'', icon:'🔑', tag:'Contoh', tag_en:'Example'},
   ];
 
   /* ============ i18n ============ */
   const translations = {
     id:{
-      nav_home:'Beranda', nav_about:'Tentang', nav_shop:'Koleksi', nav_how:'Cara Order', nav_reviews:'Testimoni', nav_contact:'Kontak',
+      nav_home:'Beranda', nav_about:'Tentang', nav_shop:'Koleksi', nav_how:'Cara Order', nav_track:'Lacak Pesanan', nav_contact:'Kontak',
       hero_eyebrow:'✧ little whimsical things ✧',
       hero_title:'Hal-hal kecil yang bikin hari kamu <em>lebih lucu</em>.',
       hero_lead:'Whimssay adalah rumah bagi produk handmade bertema whimsical — dibuat perlahan, dengan tangan, dan sepenuh hati, khusus untuk kamu yang percaya hidup harus tetap manis dan menggemaskan.',
@@ -613,27 +475,48 @@
       value1:'🧵 100% Handmade', value2:'🌿 Small Batch', value3:'💌 Dibungkus Penuh Cinta', value4:'🎀 Ready & Pre-Order',
       shop_eyebrow:'koleksi kami', shop_title:'Pilih favoritmu, langsung masukin keranjang',
       shop_sub:'Semua item ready stock terbatas — begitu habis, nunggu batch berikutnya ya, sayang!',
+      sample_note:'🌱 Ini contoh produk — admin bisa ganti foto & isi lewat halaman Developer.',
       how_eyebrow:'gampang kok', how_title:'Cara order di Whimssay',
-      how_sub:'Order langsung dari website ini, lalu kami bantu proses sampai ke tanganmu.',
+      how_sub:'Order, isi alamat, dan bayar — semuanya langsung dari website ini.',
       step1_h:'Pilih & tambahkan produk', step1_p:'Klik tombol + pada produk favoritmu di bagian Koleksi, atur jumlahnya di keranjang.',
-      step2_h:'Checkout via WhatsApp', step2_p:'Klik "Checkout Sekarang", pesananmu otomatis tersusun rapi dan terkirim ke admin via WhatsApp.',
-      step3_h:'Bayar & tunggu paket tiba', step3_p:'Admin kirim total & kode QRIS untuk pembayaran. Setelah dikonfirmasi, paket dikirim via ekspedisi rekanan (JNE/J&T/SiCepat).',
-      payment_note:'<strong>Pembayaran:</strong> khusus QRIS untuk saat ini (scan &amp; bayar dari e-wallet atau m-banking apa saja). Kode QRIS dikirimkan admin setelah pesananmu dikonfirmasi.<br><strong>Pengiriman:</strong> menggunakan jasa ekspedisi pihak ketiga, ongkir menyesuaikan berat & lokasi tujuan.',
-      testi_eyebrow:'kata mereka', testi_title:'Cerita manis dari pelanggan Whimssay',
+      step2_h:'Isi data pengiriman', step2_p:'Klik "Checkout Sekarang", isi nama, alamat, dan no. telepon. Ongkir estimasi J&T langsung terhitung.',
+      step3_h:'Bayar & lacak paket', step3_p:'Pilih bayar QRIS (Rp) atau PayPal ($). Pesanan otomatis kami terima, lalu kamu bisa lacak status pengiriman di bagian Lacak Pesanan.',
+      payment_note:'<strong>Pembayaran:</strong> QRIS (Rupiah) atau PayPal (USD), pilih saat checkout.<br><strong>Pengiriman:</strong> J&T Express, ongkir yang muncul saat checkout adalah estimasi berdasarkan wilayah — nominal final dikonfirmasi admin sebelum paket dikirim.',
+      testi_eyebrow:'kata mereka', testi_title:'Cerita dari pelanggan Whimssay',
+      testi_soon:'Belum ada testimoni — toko ini baru dibuka! Jadilah pelanggan pertama yang cerita pengalamannya di sini.',
+      track_eyebrow:'lacak pesanan', track_title:'Cek status pesanan & paketmu',
+      track_sub:'Simpan Order ID yang kamu dapat setelah checkout ya, biar gampang dicek lagi.',
+      track_order_h:'Cek status pesanan', track_order_p:'Masukkan Order ID kamu (contoh: WMS-ABC123). Ini akan mencari data di perangkat yang sama saat kamu checkout.',
+      track_order_btn:'Cek Sekarang',
+      track_jnt_h:'Lacak paket J&T', track_jnt_p:'Setelah paketmu dikirim, admin akan mengirim nomor resi J&T lewat WhatsApp/email. Tempel nomor resi itu di sini, lalu lacak langsung di situs resmi J&T.',
+      track_jnt_btn:'Lacak di J&T',
+      track_not_found:'Order ID tidak ditemukan di perangkat ini. Kalau kamu checkout dari HP lain, hubungi admin via WhatsApp untuk cek status ya.',
+      track_status_label:'Status', track_items_label:'Item',
       contact_eyebrow:'hubungi kami', contact_title:'Yuk ngobrol dulu sama Whimssay',
       contact_sub:'Tanya-tanya produk, request custom, atau sekadar say hi — kami senang dengar dari kamu.',
       social_h:'Sosial media',
-      contact_info:'WhatsApp: +62 812-3456-7890<br>Email: hello@whimssay.id<br>Instagram &amp; TikTok: @whimssay.id<br>Jam operasional: Senin–Sabtu, 09.00–20.00 WIB',
+      contact_info:'WhatsApp: +62 857-0602-3066<br>Email: whimssayid@gmail.com<br>Instagram &amp; TikTok: @whimssay.id<br>Jam operasional: Senin–Sabtu, 09.00–20.00 WIB',
       form_name:'Nama', form_name_ph:'Nama kamu', form_contact:'Email / No. HP', form_contact_ph:'Buat kami balas kamu',
       form_msg:'Pesan', form_msg_ph:'Mau tanya apa nih?', form_submit:'Kirim via WhatsApp',
       footer_tag:'whimsical handmade things, made for the girlies ✨', footer_dev:'Developer',
       cart_title:'Keranjang Kamu', cart_total:'Total', cart_checkout:'Checkout Sekarang',
       toast_added:'Ditambahkan ke keranjang 💌', empty_cart:'Keranjang masih kosong ✨<br>Yuk pilih produk favoritmu!',
-      wa_greeting:'Halo Whimssay! Aku mau order:', wa_total:'Total', wa_qris:'Mohon info QRIS untuk pembayaran ya. Terima kasih!',
-      cart_empty_alert:'Keranjang kamu masih kosong, yuk pilih produk dulu ✨'
+      // checkout modal
+      co_title:'Checkout', co_sub:'Isi data pengiriman kamu di bawah ini.',
+      co_name:'Nama Lengkap', co_phone:'No. WhatsApp / Telepon', co_address:'Alamat Lengkap (jalan, RT/RW, kelurahan)',
+      co_city:'Kota / Kabupaten', co_zone:'Wilayah Pengiriman', co_postal:'Kode Pos (opsional)', co_note:'Catatan (opsional)',
+      co_payment:'Metode Pembayaran', co_pay_idr:'Rp — QRIS', co_pay_usd:'$ — PayPal',
+      co_subtotal:'Subtotal', co_shipping:'Ongkir (estimasi)', co_total:'Total',
+      co_submit:'Kirim Pesanan', co_required:'Lengkapi nama, telepon, alamat, kota, dan wilayah pengiriman ya.',
+      co_success_title:'Pesanan diterima! 💌', co_order_id_label:'Order ID kamu',
+      co_success_note:'Simpan Order ID ini untuk cek status pesanan nanti.',
+      co_pay_idr_block:'Silakan scan QRIS di bawah untuk membayar <b>{total}</b>. Kalau QRIS belum tampil, admin akan mengirimkannya lewat WhatsApp/email.',
+      co_pay_usd_block:'Klik tombol di bawah untuk membayar <b>{total}</b> lewat PayPal.',
+      co_pay_paypal_btn:'Bayar via PayPal', co_wa_confirm:'Konfirmasi via WhatsApp', co_close:'Tutup',
+      co_email_note:'Detail pesanan juga sudah kami coba kirim ke email admin.',
     },
     en:{
-      nav_home:'Home', nav_about:'About', nav_shop:'Shop', nav_how:'How to Order', nav_reviews:'Reviews', nav_contact:'Contact',
+      nav_home:'Home', nav_about:'About', nav_shop:'Shop', nav_how:'How to Order', nav_track:'Track Order', nav_contact:'Contact',
       hero_eyebrow:'✧ little whimsical things ✧',
       hero_title:'Little things that make your day <em>a bit more cute</em>.',
       hero_lead:'Whimssay is home to whimsical handmade goods — made slowly, by hand, with heart, for anyone who believes life should stay sweet and a little silly.',
@@ -645,31 +528,48 @@
       value1:'🧵 100% Handmade', value2:'🌿 Small Batch', value3:'💌 Wrapped With Love', value4:'🎀 Ready & Pre-Order',
       shop_eyebrow:'our collection', shop_title:'Pick your favorite, add it straight to cart',
       shop_sub:'All items are limited ready stock — once they\'re gone, you\'ll have to wait for the next batch!',
+      sample_note:'🌱 These are example products — the admin can swap in real photos via the Developer page.',
       how_eyebrow:'it\'s easy', how_title:'How to order from Whimssay',
-      how_sub:'Order straight from this website, and we\'ll take care of the rest.',
+      how_sub:'Order, fill in your address, and pay — all right on this website.',
       step1_h:'Pick & add products', step1_p:'Tap the + button on your favorite items in the Shop section, adjust quantity in the cart.',
-      step2_h:'Checkout via WhatsApp', step2_p:'Tap "Checkout Now" and your order is neatly compiled and sent straight to admin on WhatsApp.',
-      step3_h:'Pay & wait for delivery', step3_p:'Admin will send the total and a QRIS code for payment. Once confirmed, your package ships via our courier partners (JNE/J&T/SiCepat).',
-      payment_note:'<strong>Payment:</strong> QRIS only for now (scan &amp; pay from any e-wallet or mobile banking app). The QRIS code is sent by admin once your order is confirmed.<br><strong>Shipping:</strong> handled by third-party couriers, rates depend on weight & destination.',
-      testi_eyebrow:'what they say', testi_title:'Sweet stories from Whimssay customers',
+      step2_h:'Fill in shipping details', step2_p:'Tap "Checkout Now", enter your name, address, and phone number. The estimated J&T shipping cost is calculated instantly.',
+      step3_h:'Pay & track your parcel', step3_p:'Pay via QRIS (IDR) or PayPal (USD). Your order is received automatically, then you can track shipping status in the Track Order section.',
+      payment_note:'<strong>Payment:</strong> QRIS (IDR) or PayPal (USD), chosen at checkout.<br><strong>Shipping:</strong> J&T Express — the shipping fee shown at checkout is a regional estimate, the final amount is confirmed by admin before the package ships.',
+      testi_eyebrow:'what they say', testi_title:'Stories from Whimssay customers',
+      testi_soon:'No reviews yet — the shop just opened! Be the first customer to share your experience here.',
+      track_eyebrow:'track order', track_title:'Check your order & parcel status',
+      track_sub:'Save the Order ID you get after checkout so it\'s easy to look up later.',
+      track_order_h:'Check order status', track_order_p:'Enter your Order ID (e.g. WMS-ABC123). This looks up data on the same device you used to check out.',
+      track_order_btn:'Check Now',
+      track_jnt_h:'Track your J&T parcel', track_jnt_p:'Once your parcel ships, admin will send you the J&T waybill number via WhatsApp/email. Paste it here, then track it directly on J&T\'s official site.',
+      track_jnt_btn:'Track on J&T',
+      track_not_found:'Order ID not found on this device. If you checked out from another phone, contact admin via WhatsApp to check status.',
+      track_status_label:'Status', track_items_label:'Items',
       contact_eyebrow:'get in touch', contact_title:'Let\'s chat with Whimssay',
       contact_sub:'Ask about products, request a custom order, or just say hi — we love hearing from you.',
       social_h:'Social media',
-      contact_info:'WhatsApp: +62 812-3456-7890<br>Email: hello@whimssay.id<br>Instagram &amp; TikTok: @whimssay.id<br>Hours: Mon–Sat, 09:00–20:00 WIB',
+      contact_info:'WhatsApp: +62 857-0602-3066<br>Email: whimssayid@gmail.com<br>Instagram &amp; TikTok: @whimssay.id<br>Hours: Mon–Sat, 09:00–20:00 WIB',
       form_name:'Name', form_name_ph:'Your name', form_contact:'Email / Phone', form_contact_ph:'So we can reply to you',
       form_msg:'Message', form_msg_ph:'What would you like to ask?', form_submit:'Send via WhatsApp',
       footer_tag:'whimsical handmade things, made for the girlies ✨', footer_dev:'Developer',
       cart_title:'Your Cart', cart_total:'Total', cart_checkout:'Checkout Now',
       toast_added:'Added to cart 💌', empty_cart:'Your cart is empty ✨<br>Go pick your favorites!',
-      wa_greeting:'Hi Whimssay! I\'d like to order:', wa_total:'Total', wa_qris:'Please send the QRIS code for payment. Thank you!',
-      cart_empty_alert:'Your cart is still empty, pick a product first ✨'
+      co_title:'Checkout', co_sub:'Fill in your shipping details below.',
+      co_name:'Full Name', co_phone:'WhatsApp / Phone Number', co_address:'Full Address (street, RT/RW, subdistrict)',
+      co_city:'City / Regency', co_zone:'Shipping Region', co_postal:'Postal Code (optional)', co_note:'Note (optional)',
+      co_payment:'Payment Method', co_pay_idr:'Rp — QRIS', co_pay_usd:'$ — PayPal',
+      co_subtotal:'Subtotal', co_shipping:'Shipping (estimate)', co_total:'Total',
+      co_submit:'Place Order', co_required:'Please fill in name, phone, address, city, and shipping region.',
+      co_success_title:'Order received! 💌', co_order_id_label:'Your Order ID',
+      co_success_note:'Save this Order ID to check your order status later.',
+      co_pay_idr_block:'Please scan the QRIS below to pay <b>{total}</b>. If no QRIS shows yet, admin will send it via WhatsApp/email.',
+      co_pay_usd_block:'Tap the button below to pay <b>{total}</b> via PayPal.',
+      co_pay_paypal_btn:'Pay via PayPal', co_wa_confirm:'Confirm via WhatsApp', co_close:'Close',
+      co_email_note:'We\'ve also tried sending the order details to admin\'s email.',
     }
   };
 
   let currentLang = localStorage.getItem('whimssay_lang') || 'id';
-  let currentCurrency = localStorage.getItem('whimssay_currency') || 'IDR';
-  const USD_RATE = 15800; // approximate, fixed rate — update as needed. 1 USD = this many IDR.
-
   function t(key){ return (translations[currentLang] && translations[currentLang][key]) ?? key; }
 
   function applyStaticText(){
@@ -680,77 +580,49 @@
     document.getElementById('langID').classList.toggle('active', currentLang==='id');
     document.getElementById('langEN').classList.toggle('active', currentLang==='en');
   }
-
   function setLang(lang){
     currentLang = lang;
     localStorage.setItem('whimssay_lang', lang);
     applyStaticText();
     renderProducts();
-    renderTestimonials();
     renderCart();
+    populateZoneOptions();
   }
 
-  function setCurrency(cur){
-    currentCurrency = cur;
-    localStorage.setItem('whimssay_currency', cur);
-    document.getElementById('curIDR').classList.toggle('active', cur==='IDR');
-    document.getElementById('curUSD').classList.toggle('active', cur==='USD');
-    renderProducts();
-    renderCart();
-  }
-
-  function formatPrice(priceIDR){
-    if(currentCurrency === 'USD'){
-      return '$' + (priceIDR / USD_RATE).toFixed(2);
-    }
-    return 'Rp ' + priceIDR.toLocaleString('id-ID');
-  }
+  /* ============ price helpers (Rp & USD shown together) ============ */
+  function fmtIDR(n){ return 'Rp ' + Math.round(n).toLocaleString('id-ID'); }
+  function fmtUSD(n){ return '$' + (n / USD_RATE).toFixed(2); }
+  function fmtDual(n){ return `${fmtIDR(n)} <small>${fmtUSD(n)}</small>`; }
 
   /* ============ merge admin-added products (same browser only — see admin.html) ============ */
   function getAllProducts(){
     let extra = [];
-    try{
-      extra = JSON.parse(localStorage.getItem('whimssay_extra_products') || '[]');
-    }catch(e){ extra = []; }
+    try{ extra = JSON.parse(localStorage.getItem('whimssay_extra_products') || '[]'); }catch(e){ extra = []; }
     return [...defaultProducts, ...extra];
   }
-
   function localName(p){ return currentLang==='en' ? (p.name_en || p.name) : p.name; }
   function localDesc(p){ return currentLang==='en' ? (p.desc_en || p.desc) : p.desc; }
   function localTag(p){ return currentLang==='en' ? (p.tag_en || p.tag) : p.tag; }
-  function localQuote(t){ return currentLang==='en' ? (t.quote_en || t.quote) : t.quote; }
 
   function renderProducts(){
     const grid = document.getElementById('productGrid');
     grid.innerHTML = '';
     getAllProducts().forEach(p=>{
+      const visual = p.image
+        ? `<img src="${p.image}" alt="${localName(p)}" loading="lazy">`
+        : (p.icon || '🎀');
       const card = document.createElement('div');
       card.className='card';
       card.innerHTML = `
         <span class="card-tag">${localTag(p)}</span>
-        <div class="card-visual">${p.icon}</div>
+        <div class="card-visual">${visual}</div>
         <h3>${localName(p)}</h3>
         <p class="desc">${localDesc(p)}</p>
         <div class="card-footer">
-          <span class="price">${formatPrice(p.price)}</span>
+          <span class="price">${fmtDual(p.price)}</span>
           <button class="qty-add" onclick="addToCart('${p.id}')" aria-label="Tambah ke keranjang">+</button>
         </div>`;
       grid.appendChild(card);
-    });
-  }
-
-  function renderTestimonials(){
-    const testiGrid = document.getElementById('testiGrid');
-    testiGrid.innerHTML = '';
-    testimonials.forEach(tItem=>{
-      const c = document.createElement('div');
-      c.className='testi-card';
-      c.innerHTML = `
-        <div class="stars">★★★★★</div>
-        <p class="quote">"${localQuote(tItem)}"</p>
-        <div class="testi-name">${tItem.name}</div>
-        <div class="testi-loc">${tItem.loc}</div>`;
-      testiGrid.appendChild(c);
     });
   }
 
@@ -767,11 +639,18 @@
     if(cart[id]<=0) delete cart[id];
     renderCart();
   }
+  function cartSubtotal(){
+    const all = getAllProducts();
+    return Object.keys(cart).reduce((sum,id)=>{
+      const p = all.find(x=>x.id===id);
+      return p ? sum + p.price*cart[id] : sum;
+    },0);
+  }
   function renderCart(){
     const itemsEl = document.getElementById('cartItems');
     const all = getAllProducts();
     const ids = Object.keys(cart);
-    let count=0, total=0;
+    let count=0;
     if(ids.length===0){
       itemsEl.innerHTML = `<div class="empty-cart">${t('empty_cart')}</div>`;
     } else {
@@ -780,12 +659,12 @@
         if(!p) return '';
         const qty = cart[id];
         count += qty;
-        total += qty * p.price;
+        const thumb = p.image ? `<img src="${p.image}" alt="">` : (p.icon || '🎀');
         return `<div class="cart-item">
-          <div class="ci-icon">${p.icon}</div>
+          <div class="ci-icon">${thumb}</div>
           <div class="ci-info">
             <h5>${localName(p)}</h5>
-            <span>${formatPrice(p.price)} x ${qty}</span>
+            <span>${fmtIDR(p.price)} x ${qty}</span>
           </div>
           <div class="ci-controls">
             <button onclick="changeQty('${id}',-1)">-</button>
@@ -796,14 +675,13 @@
       }).join('');
     }
     document.getElementById('cartBadge').textContent = count;
-    document.getElementById('cartTotal').textContent = formatPrice(total);
+    document.getElementById('cartTotal').innerHTML = fmtDual(cartSubtotal());
   }
 
   function toggleCart(open){
     document.getElementById('cartDrawer').classList.toggle('active', open);
     document.getElementById('overlay').classList.toggle('active', open);
   }
-
   function showToast(){
     const tEl = document.getElementById('toast');
     tEl.textContent = t('toast_added');
@@ -812,24 +690,205 @@
     window._toastTimer = setTimeout(()=>tEl.classList.remove('show'), 1800);
   }
 
-  function checkoutWA(){
-    const all = getAllProducts();
-    const ids = Object.keys(cart);
-    if(ids.length===0){
-      alert(t('cart_empty_alert'));
+  /* ============ checkout modal ============ */
+  function populateZoneOptions(sel){
+    const select = sel || document.getElementById('coZone');
+    if(!select) return;
+    const current = select.value;
+    select.innerHTML = '<option value="">--</option>' + Object.entries(shippingZones).map(([key,z])=>
+      `<option value="${key}">${currentLang==='en'?z.label_en:z.label_id} — ${fmtIDR(z.rate)}</option>`
+    ).join('');
+    if(current) select.value = current;
+  }
+
+  function openCheckout(){
+    if(Object.keys(cart).length===0){
+      alert(currentLang==='en' ? 'Your cart is empty — pick a product first ✨' : 'Keranjang kamu masih kosong, yuk pilih produk dulu ✨');
       return;
     }
-    let msg = t('wa_greeting') + '%0A';
-    let total = 0;
-    ids.forEach(id=>{
+    renderCheckoutForm();
+    document.getElementById('checkoutOverlay').classList.add('active');
+    toggleCart(false);
+  }
+  function closeCheckout(){
+    document.getElementById('checkoutOverlay').classList.remove('active');
+  }
+
+  function renderCheckoutForm(){
+    const box = document.getElementById('checkoutBox');
+    box.innerHTML = `
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <h3>${t('co_title')}</h3>
+      <p class="sub">${t('co_sub')}</p>
+      <label>${t('co_name')}</label>
+      <input type="text" id="coName">
+      <label>${t('co_phone')}</label>
+      <input type="tel" id="coPhone">
+      <label>${t('co_address')}</label>
+      <textarea id="coAddress"></textarea>
+      <label>${t('co_city')}</label>
+      <input type="text" id="coCity">
+      <label>${t('co_zone')}</label>
+      <select id="coZone" onchange="updateCheckoutSummary()"></select>
+      <label>${t('co_postal')}</label>
+      <input type="text" id="coPostal">
+      <label>${t('co_note')}</label>
+      <textarea id="coNote"></textarea>
+      <label>${t('co_payment')}</label>
+      <div class="pay-options">
+        <div class="pay-opt active" id="payOptIDR" onclick="setPayMethod('IDR')">${t('co_pay_idr')}</div>
+        <div class="pay-opt" id="payOptUSD" onclick="setPayMethod('USD')">${t('co_pay_usd')}</div>
+      </div>
+      <div class="checkout-summary" id="checkoutSummary"></div>
+      <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitCheckout()">${t('co_submit')}</button>
+    `;
+    populateZoneOptions(document.getElementById('coZone'));
+    window._payMethod = 'IDR';
+    updateCheckoutSummary();
+  }
+
+  function setPayMethod(method){
+    window._payMethod = method;
+    document.getElementById('payOptIDR').classList.toggle('active', method==='IDR');
+    document.getElementById('payOptUSD').classList.toggle('active', method==='USD');
+    updateCheckoutSummary();
+  }
+
+  function updateCheckoutSummary(){
+    const zoneKey = document.getElementById('coZone').value;
+    const zone = shippingZones[zoneKey];
+    const subtotal = cartSubtotal();
+    const shipping = zone ? zone.rate : 0;
+    const total = subtotal + shipping;
+    const method = window._payMethod || 'IDR';
+    const fmt = method==='USD' ? fmtUSD : fmtIDR;
+    document.getElementById('checkoutSummary').innerHTML = `
+      <div class="row"><span>${t('co_subtotal')}</span><span>${fmt(subtotal)}</span></div>
+      <div class="row"><span>${t('co_shipping')}</span><span>${zone ? fmt(shipping) : '—'}</span></div>
+      <div class="row total"><span>${t('co_total')}</span><span>${fmt(total)}</span></div>
+    `;
+  }
+
+  function submitCheckout(){
+    const name = document.getElementById('coName').value.trim();
+    const phone = document.getElementById('coPhone').value.trim();
+    const address = document.getElementById('coAddress').value.trim();
+    const city = document.getElementById('coCity').value.trim();
+    const zoneKey = document.getElementById('coZone').value;
+    const postal = document.getElementById('coPostal').value.trim();
+    const note = document.getElementById('coNote').value.trim();
+    const method = window._payMethod || 'IDR';
+
+    if(!name || !phone || !address || !city || !zoneKey){
+      alert(t('co_required'));
+      return;
+    }
+    const zone = shippingZones[zoneKey];
+    const all = getAllProducts();
+    const items = Object.keys(cart).map(id=>{
       const p = all.find(x=>x.id===id);
-      if(!p) return;
-      const qty = cart[id];
-      total += qty*p.price;
-      msg += `- ${localName(p)} x${qty} (${formatPrice(p.price*qty)})%0A`;
-    });
-    msg += `%0A${t('wa_total')}: ${formatPrice(total)}%0A${t('wa_qris')}`;
-    window.open(`https://wa.me/6281234567890?text=${msg}`, '_blank');
+      return p ? {id, name:localName(p), qty:cart[id], price:p.price} : null;
+    }).filter(Boolean);
+    const subtotal = cartSubtotal();
+    const shipping = zone.rate;
+    const totalIDR = subtotal + shipping;
+
+    const orderId = 'WMS-' + Date.now().toString(36).toUpperCase();
+    const order = {
+      id: orderId, createdAt: new Date().toISOString(), status: 'Menunggu Konfirmasi',
+      customer:{name, phone, address, city, zone: currentLang==='en'?zone.label_en:zone.label_id, postal, note},
+      items, subtotalIDR, shippingIDR: shipping, totalIDR, paymentMethod: method,
+    };
+
+    // save locally so the buyer can look it up again on this device
+    try{
+      const orders = JSON.parse(localStorage.getItem('whimssay_orders') || '[]');
+      orders.push(order);
+      localStorage.setItem('whimssay_orders', JSON.stringify(orders));
+    }catch(e){}
+
+    // best-effort email notification via Formspree
+    let emailAttempted = false;
+    if(FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes('REPLACE_WITH_YOUR_FORM_ID')){
+      emailAttempted = true;
+      fetch(FORMSPREE_ENDPOINT, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          orderId, name, phone, address, city, zone: order.customer.zone, postal, note,
+          items: items.map(i=>`${i.name} x${i.qty} (${fmtIDR(i.price*i.qty)})`).join(' | '),
+          subtotal: fmtIDR(subtotal), shipping: fmtIDR(shipping), total: fmtIDR(totalIDR), paymentMethod: method,
+        })
+      }).catch(()=>{});
+    }
+
+    renderCheckoutSuccess(order, emailAttempted);
+  }
+
+  function renderCheckoutSuccess(order, emailAttempted){
+    const box = document.getElementById('checkoutBox');
+    const total = order.paymentMethod==='USD' ? fmtUSD(order.totalIDR) : fmtIDR(order.totalIDR);
+
+    let payBlock = '';
+    if(order.paymentMethod==='IDR'){
+      const qrisImg = QRIS_IMAGE ? `<img src="${QRIS_IMAGE}" alt="QRIS">` : '';
+      payBlock = `<div class="pay-block">${t('co_pay_idr_block').replace('{total}', total)}${qrisImg}</div>`;
+    } else {
+      const paypalUrl = `https://paypal.me/${PAYPAL_USERNAME}/${(order.totalIDR/USD_RATE).toFixed(2)}USD`;
+      payBlock = `<div class="pay-block">${t('co_pay_usd_block').replace('{total}', total)}
+        <div style="margin-top:12px;"><a href="${paypalUrl}" target="_blank" rel="noopener" class="btn btn-sage" style="width:100%; justify-content:center;">${t('co_pay_paypal_btn')}</a></div>
+      </div>`;
+    }
+
+    const itemsSummary = order.items.map(i=>`- ${i.name} x${i.qty}`).join('%0A');
+    const waMsg = `${currentLang==='en' ? 'Hi Whimssay! Order' : 'Halo Whimssay! Pesanan'} ${order.id}:%0A${itemsSummary}%0A${currentLang==='en'?'Total':'Total'}: ${fmtIDR(order.totalIDR)}%0A${currentLang==='en'?'Name':'Nama'}: ${order.customer.name}%0A${currentLang==='en'?'Address':'Alamat'}: ${order.customer.address}, ${order.customer.city}%0A${currentLang==='en'?'Phone':'Telepon'}: ${order.customer.phone}`;
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(decodeURIComponent(waMsg.replace(/%0A/g,'\n')))}`;
+
+    box.innerHTML = `
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <div class="success-box">
+        <div class="emoji">🎀</div>
+        <h3>${t('co_success_title')}</h3>
+        <div class="order-id-chip">${order.id}</div>
+        <p class="sub">${t('co_success_note')}</p>
+        ${payBlock}
+        ${emailAttempted ? `<p class="sub" style="margin-top:10px;">${t('co_email_note')}</p>` : ''}
+        <div class="success-actions">
+          <a class="btn btn-outline" href="${waUrl}" target="_blank" rel="noopener">${t('co_wa_confirm')}</a>
+          <button class="btn btn-primary" onclick="finishCheckout()">${t('co_close')}</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function finishCheckout(){
+    cart = {};
+    renderCart();
+    closeCheckout();
+  }
+
+  /* ============ tracking ============ */
+  function lookupOrder(){
+    const idVal = document.getElementById('trackOrderId').value.trim().toUpperCase();
+    const resultEl = document.getElementById('trackOrderResult');
+    if(!idVal){ return; }
+    let orders = [];
+    try{ orders = JSON.parse(localStorage.getItem('whimssay_orders') || '[]'); }catch(e){}
+    const found = orders.find(o=>o.id.toUpperCase()===idVal);
+    if(!found){
+      resultEl.innerHTML = t('track_not_found');
+      resultEl.classList.add('show');
+      return;
+    }
+    resultEl.innerHTML = `
+      <b>${t('track_status_label')}:</b> ${found.status}<br>
+      <b>${t('track_items_label')}:</b> ${found.items.map(i=>`${i.name} x${i.qty}`).join(', ')}<br>
+      <b>${t('co_total')}:</b> ${fmtIDR(found.totalIDR)}
+    `;
+    resultEl.classList.add('show');
+  }
+  function trackJnt(){
+    window.open('https://jet.co.id/track', '_blank');
   }
 
   document.getElementById('contactForm').addEventListener('submit', function(e){
@@ -837,21 +896,17 @@
     const name = document.getElementById('cname').value;
     const contact = document.getElementById('cemail').value;
     const message = document.getElementById('cmsg').value;
-    const msg = `Halo Whimssay! Aku ${name} (${contact}).%0A%0A${message}`;
-    window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(msg).replace(/%20/g,' ')}`, '_blank');
+    const msg = `Halo Whimssay! Aku ${name} (${contact}).\n\n${message}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
-  // close mobile nav after click
   document.querySelectorAll('.nav-links a').forEach(a=>{
     a.addEventListener('click', ()=> document.getElementById('navLinks').classList.remove('open'));
   });
 
   // init
-  document.getElementById('curIDR').classList.toggle('active', currentCurrency==='IDR');
-  document.getElementById('curUSD').classList.toggle('active', currentCurrency==='USD');
   applyStaticText();
   renderProducts();
-  renderTestimonials();
   renderCart();
 </script>
 </body>
