@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whimssay — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose:#C66F80; --pink:#F4C7D0; --blush:#FCEBF1; --forest:#4A6644;
+    --sage:#9FAA74; --sage-light:#D7DAB3; --cream:#ECE3D2; --ink:#3c3630;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Poppins', sans-serif; background:var(--blush); color:var(--ink); min-height:100vh;}
+  h1,h2,h3{font-family:'Fraunces', serif; color:var(--forest);}
+  .wrap{max-width:760px; margin:0 auto; padding:50px 24px 90px;}
+  a.back{font-size:0.85rem; color:var(--rose); font-weight:600;}
+  header{margin-bottom:30px;}
+  header h1{font-size:1.9rem; margin-top:10px;}
+  header p{color:#6b6355; margin-top:8px; font-size:0.92rem; line-height:1.6;}
+  .card{background:var(--cream); border:2px dashed var(--rose); border-radius:18px; padding:26px; margin-bottom:24px;}
+  .card h2{font-size:1.15rem; margin-bottom:14px;}
+  label{display:block; font-size:0.82rem; font-weight:600; color:var(--forest); margin-bottom:6px; margin-top:14px;}
+  label:first-of-type{margin-top:0;}
+  input, textarea{
+    width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--sage);
+    font-family:'Poppins', sans-serif; font-size:0.9rem; background:#fff;
+  }
+  textarea{resize:vertical; min-height:70px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border-radius:40px;
+    font-weight:600; font-size:0.92rem; cursor:pointer; border:2px solid transparent; margin-top:18px;
+    background:var(--rose); color:#fff; transition:all .2s;
+  }
+  .btn:hover{background:#b25a6b;}
+  .btn-outline{background:transparent; border-color:var(--forest); color:var(--forest);}
+  .btn-outline:hover{background:var(--forest); color:#fff;}
+  .btn-ghost{background:none; color:var(--rose); text-decoration:underline; padding:0; margin-left:14px;}
+  .notice{
+    background:#fff8ec; border:1.5px dashed #c98b2d; border-radius:14px; padding:16px 18px;
+    font-size:0.85rem; line-height:1.6; color:#6b4e17; margin-bottom:24px;
+  }
+  .notice strong{color:#8a5c00;}
+  .plist{margin-top:10px;}
+  .prow{
+    display:flex; align-items:center; gap:12px; background:#fff; border-radius:12px; padding:10px 14px; margin-bottom:8px;
+  }
+  .prow .icon{font-size:1.4rem;}
+  .prow .info{flex:1; font-size:0.85rem;}
+  .prow .info b{color:var(--forest);}
+  .prow button{
+    background:none; border:1px solid var(--rose); color:var(--rose); border-radius:20px;
+    padding:4px 12px; font-size:0.75rem; cursor:pointer;
+  }
+  #snippetBox{
+    width:100%; min-height:160px; font-family:monospace; font-size:0.78rem; background:#2b2620; color:#e9e0d0;
+    border-radius:10px; padding:14px; border:none; margin-top:10px;
+  }
+  #loginGate{max-width:400px; margin:90px auto; text-align:center;}
+  #loginGate input{margin-top:14px;}
+  #loginGate .btn{width:100%; justify-content:center;}
+  .hidden{display:none;}
+  .err{color:#b23b3b; font-size:0.82rem; margin-top:8px;}
+</style>
+</head>
+<body>
+
+<div id="loginGate" class="wrap">
+  <span style="font-size:2rem;">🔒</span>
+  <h1 style="margin-top:10px;">Developer Login</h1>
+  <p style="color:#6b6355; font-size:0.88rem; margin-top:8px;">Halaman ini untuk mengelola produk Whimssay. Masukkan password developer.</p>
+  <input type="password" id="pwInput" placeholder="Password developer">
+  <button class="btn" onclick="tryLogin()">Masuk</button>
+  <div class="err hidden" id="pwErr">Password salah, coba lagi.</div>
+</div>
+
+<div id="adminPanel" class="wrap hidden">
+  <a class="back" href="index.html">← Kembali ke toko</a>
+  <header>
+    <h1>Panel Developer</h1>
+    <p>Tambah produk baru di sini. Ganti password default di kode sebelum kamu publikasikan situs ini secara publik.</p>
+  </header>
+
+  <div class="notice">
+    <strong>Penting:</strong> situs ini adalah situs statis (tanpa server/database), jadi produk yang kamu tambahkan
+    lewat panel ini hanya tersimpan di browser kamu sendiri (localStorage) — pengunjung lain <strong>tidak</strong> akan
+    melihatnya otomatis. Untuk menampilkannya ke semua orang: isi form di bawah, lalu klik <strong>"Salin kode produk"</strong>,
+    tempel snippet itu ke dalam array <code>defaultProducts</code> di file <code>index.html</code>, dan push ulang ke GitHub.
+    Panel ini juga tidak benar-benar aman — siapa pun yang tahu passwordnya (atau membaca kode sumbernya) bisa masuk.
+  </div>
+
+  <div class="card">
+    <h2>➕ Tambah Produk</h2>
+    <label for="pName">Nama produk (Indonesia)</label>
+    <input type="text" id="pName" placeholder='mis. Bando Rajut "Daisy"'>
+    <label for="pNameEn">Product name (English) — opsional</label>
+    <input type="text" id="pNameEn" placeholder='e.g. Knit Headband "Daisy"'>
+    <label for="pDesc">Deskripsi (Indonesia)</label>
+    <textarea id="pDesc" placeholder="Deskripsi singkat produk"></textarea>
+    <label for="pDescEn">Description (English) — opsional</label>
+    <textarea id="pDescEn" placeholder="Short product description"></textarea>
+    <div class="row2">
+      <div>
+        <label for="pPrice">Harga (Rp)</label>
+        <input type="number" id="pPrice" placeholder="45000">
+      </div>
+      <div>
+        <label for="pIcon">Emoji ikon</label>
+        <input type="text" id="pIcon" placeholder="🌼">
+      </div>
+    </div>
+    <label for="pTag">Label (mis. New, Best Seller)</label>
+    <input type="text" id="pTag" placeholder="New">
+    <button class="btn" onclick="addProduct()">Simpan produk</button>
+  </div>
+
+  <div class="card">
+    <h2>📦 Produk tambahan tersimpan</h2>
+    <div class="plist" id="plist"></div>
+    <button class="btn btn-outline" onclick="exportSnippet()">Salin kode produk</button>
+    <button class="btn-ghost" onclick="clearAll()">Hapus semua</button>
+    <textarea id="snippetBox" class="hidden" readonly></textarea>
+  </div>
+</div>
+
+<script>
+  // Change this before deploying publicly. This only hides the panel from casual visitors —
+  // it is NOT real security since anyone can read this file's source.
+  const DEV_PASSWORD = 'whimssay2026';
+
+  function tryLogin(){
+    const val = document.getElementById('pwInput').value;
+    if(val === DEV_PASSWORD){
+      sessionStorage.setItem('whimssay_admin_ok','1');
+      showPanel();
+    } else {
+      document.getElementById('pwErr').classList.remove('hidden');
+    }
+  }
+  function showPanel(){
+    document.getElementById('loginGate').classList.add('hidden');
+    document.getElementById('adminPanel').classList.remove('hidden');
+    renderList();
+  }
+  if(sessionStorage.getItem('whimssay_admin_ok') === '1'){ showPanel(); }
+
+  function getExtra(){
+    try{ return JSON.parse(localStorage.getItem('whimssay_extra_products') || '[]'); }
+    catch(e){ return []; }
+  }
+  function saveExtra(list){
+    localStorage.setItem('whimssay_extra_products', JSON.stringify(list));
+  }
+
+  function addProduct(){
+    const name = document.getElementById('pName').value.trim();
+    const price = parseInt(document.getElementById('pPrice').value, 10);
+    if(!name || !price){
+      alert('Isi minimal nama dan harga produk ya.');
+      return;
+    }
+    const p = {
+      id: 'custom_' + Date.now(),
+      name,
+      name_en: document.getElementById('pNameEn').value.trim(),
+      desc: document.getElementById('pDesc').value.trim(),
+      desc_en: document.getElementById('pDescEn').value.trim(),
+      price,
+      icon: document.getElementById('pIcon').value.trim() || '🎀',
+      tag: document.getElementById('pTag').value.trim() || 'New',
+      tag_en: document.getElementById('pTag').value.trim() || 'New',
+    };
+    const list = getExtra();
+    list.push(p);
+    saveExtra(list);
+    ['pName','pNameEn','pDesc','pDescEn','pPrice','pIcon','pTag'].forEach(id=>document.getElementById(id).value='');
+    renderList();
+  }
+
+  function removeProduct(id){
+    saveExtra(getExtra().filter(p=>p.id!==id));
+    renderList();
+  }
+
+  function clearAll(){
+    if(confirm('Hapus semua produk tambahan yang tersimpan di browser ini?')){
+      saveExtra([]);
+      renderList();
+    }
+  }
+
+  function renderList(){
+    const list = getExtra();
+    const el = document.getElementById('plist');
+    if(list.length===0){
+      el.innerHTML = '<p style="font-size:0.85rem; color:#8a8272;">Belum ada produk tambahan. Isi form di atas untuk menambah.</p>';
+      return;
+    }
+    el.innerHTML = list.map(p=>`
+      <div class="prow">
+        <div class="icon">${p.icon}</div>
+        <div class="info"><b>${p.name}</b> — Rp ${p.price.toLocaleString('id-ID')}</div>
+        <button onclick="removeProduct('${p.id}')">Hapus</button>
+      </div>`).join('');
+  }
+
+  function exportSnippet(){
+    const list = getExtra();
+    const box = document.getElementById('snippetBox');
+    if(list.length===0){
+      alert('Belum ada produk untuk diekspor.');
+      return;
+    }
+    const lines = list.map(p=>
+      `    {id:'${p.id}', name:'${esc(p.name)}', name_en:'${esc(p.name_en||p.name)}', desc:'${esc(p.desc)}', desc_en:'${esc(p.desc_en||p.desc)}', price:${p.price}, icon:'${p.icon}', tag:'${esc(p.tag)}', tag_en:'${esc(p.tag_en||p.tag)}'},`
+    );
+    box.value = lines.join('\n');
+    box.classList.remove('hidden');
+    box.select();
+    try{ document.execCommand('copy'); }catch(e){}
+  }
+
+  function esc(str){ return String(str||'').replace(/'/g, "\\'"); }
+</script>
+</body>
+</html>
