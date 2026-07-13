@@ -242,7 +242,7 @@
 <!-- HERO -->
 <section class="hero" id="beranda" style="--edge-color:var(--cream)">
   <span class="doodle" style="top:14%; left:6%;">🌸</span>
-  <span class="doodle" style="top:70%; left:12%; animation-delay:1s;">✨</span>
+  <span class="doodle" style="top:70%; left:8%; animation-delay:1s;">✨</span>
   <span class="doodle" style="top:20%; right:8%; animation-delay:2s;">🎀</span>
   <span class="doodle" style="top:75%; right:14%; animation-delay:1.5s;">🍓</span>
   <div class="wrap hero-grid">
@@ -440,13 +440,13 @@
   const WA_NUMBER = '6285706023066';               // admin WhatsApp (checkout fallback + contact form)
   const ADMIN_EMAIL = 'whimssayid@gmail.com';
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID'; // see README
-  const PAYPAL_USERNAME = 'whimssayid';             // your paypal.me username — replace with the real one
-  const QRIS_IMAGE = '';                            // e.g. 'qris.jpg' if you upload your static QRIS image to the repo
-  const USD_RATE = 15800;                           // approximate fixed IDR-per-USD rate, update as needed
+  const PAYPAL_USERNAME = 'paypal.me/whimssayid';             // your paypal.me username — replace with the real one
+  const QRIS_IMAGE = 'qris.jpg';                            // e.g. 'qris.jpg' if you upload your static QRIS image to the repo
+  const USD_RATE = 20.000;                           // approximate fixed IDR-per-USD rate, update as needed
 
   const shippingZones = {
-    jabodetabek:{label_id:'Jabodetabek', label_en:'Jabodetabek (Jakarta area)', rate:12000},
-    jawa:{label_id:'Jawa (luar Jabodetabek)', label_en:'Java (outside Jabodetabek)', rate:18000},
+    jabodetabek:{label_id:'Jabodetabek', label_en:'Jabodetabek (Jakarta area)', rate:18000},
+    jawa:{label_id:'Jawa (luar Jabodetabek)', label_en:'Java (outside Jabodetabek)', rate:12000},
     sumatera:{label_id:'Sumatera', label_en:'Sumatra', rate:25000},
     kalisulteng:{label_id:'Kalimantan / Sulawesi', label_en:'Kalimantan / Sulawesi', rate:30000},
     timur:{label_id:'Indonesia Timur & lainnya', label_en:'Eastern Indonesia & others', rate:38000},
@@ -456,7 +456,7 @@
      Two examples only — replace with your real products & photos via admin.html,
      then paste the exported snippet here so every visitor sees them. */
   const defaultProducts = [
-    {id:'p1', name:'Scrunchie Rajut "Petal"', name_en:'Knit Scrunchie "Petal"', desc:'Scrunchie rajutan motif bunga, lembut & elastis.', desc_en:'Hand-knit floral scrunchie, soft & stretchy.', price:35000, image:'', icon:'🎀', tag:'Contoh', tag_en:'Example'},
+    {id:'p1', name:'"whimcare" set', name_en:'"whimcare" set', desc:'Scrunchie rajutan motif bunga, lembut & elastis.', desc_en:'Hand-knit floral scrunchie, soft & stretchy.', price:35000, image:'', icon:'🎀', tag:'Contoh', tag_en:'Example'},
     {id:'p2', name:'Gantungan Kunci Resin "Little Bloom"', name_en:'Resin Keychain "Little Bloom"', desc:'Resin handmade dengan bunga kering asli di dalamnya.', desc_en:'Handmade resin charm with real dried flowers inside.', price:45000, image:'', icon:'🔑', tag:'Contoh', tag_en:'Example'},
   ];
 
