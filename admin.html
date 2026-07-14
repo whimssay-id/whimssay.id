@@ -23,6 +23,7 @@
   .card h2{font-size:1.15rem; margin-bottom:14px;}
   label{display:block; font-size:0.82rem; font-weight:600; color:var(--forest); margin-bottom:6px; margin-top:14px;}
   label:first-of-type{margin-top:0;}
+  label .hint{font-weight:400; color:#8a8272; font-size:0.75rem;}
   input, textarea{
     width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--sage);
     font-family:'Poppins', sans-serif; font-size:0.9rem; background:#fff;
@@ -47,7 +48,8 @@
   .prow{
     display:flex; align-items:center; gap:12px; background:#fff; border-radius:12px; padding:10px 14px; margin-bottom:8px;
   }
-  .prow .icon{font-size:1.4rem;}
+  .prow .thumb{width:44px; height:44px; border-radius:8px; overflow:hidden; background:var(--pink); display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0;}
+  .prow .thumb img{width:100%; height:100%; object-fit:cover;}
   .prow .info{flex:1; font-size:0.85rem;}
   .prow .info b{color:var(--forest);}
   .prow button{
@@ -103,15 +105,18 @@
     <textarea id="pDescEn" placeholder="Short product description"></textarea>
     <div class="row2">
       <div>
-        <label for="pPrice">Harga (Rp)</label>
+        <label for="pPrice">Harga (Rp) <span class="hint">— angka biasa, mis. 45000</span></label>
         <input type="number" id="pPrice" placeholder="45000">
       </div>
       <div>
-        <label for="pIcon">Emoji ikon</label>
+        <label for="pIcon">Emoji ikon <span class="hint">— cadangan kalau belum ada foto</span></label>
         <input type="text" id="pIcon" placeholder="🌼">
       </div>
     </div>
-    <label for="pTag">Label (mis. New, Best Seller)</label>
+    <label for="pImage">URL Foto Produk <span class="hint">— nama file/URL, kosongkan kalau belum ada</span></label>
+    <input type="text" id="pImage" placeholder="mis. foto-bando-daisy.jpg atau https://...">
+    <p style="font-size:0.78rem; color:#8a8272; margin-top:4px;">Tips: upload foto ke folder yang sama dengan index.html di GitHub repo kamu, lalu tulis nama filenya di sini (mis. <code>bando-daisy.jpg</code>). Atau pakai link foto dari hosting lain (Imgur, Google Drive share link yang public, dll).</p>
+    <label for="pTag">Label (mis. New, Best Seller) — opsional</label>
     <input type="text" id="pTag" placeholder="New">
     <button class="btn" onclick="addProduct()">Simpan produk</button>
   </div>
@@ -128,54 +133,55 @@
 <script>
   // Change this before deploying publicly. This only hides the panel from casual visitors —
   // it is NOT real security since anyone can read this file's source.
-  const DEV_PASSWORD = 'whimssay2026';
+  const DEV_PASSWORD = "whimssay2026";
 
   function tryLogin(){
-    const val = document.getElementById('pwInput').value;
+    const val = document.getElementById("pwInput").value;
     if(val === DEV_PASSWORD){
-      sessionStorage.setItem('whimssay_admin_ok','1');
+      sessionStorage.setItem("whimssay_admin_ok","1");
       showPanel();
     } else {
-      document.getElementById('pwErr').classList.remove('hidden');
+      document.getElementById("pwErr").classList.remove("hidden");
     }
   }
   function showPanel(){
-    document.getElementById('loginGate').classList.add('hidden');
-    document.getElementById('adminPanel').classList.remove('hidden');
+    document.getElementById("loginGate").classList.add("hidden");
+    document.getElementById("adminPanel").classList.remove("hidden");
     renderList();
   }
-  if(sessionStorage.getItem('whimssay_admin_ok') === '1'){ showPanel(); }
+  if(sessionStorage.getItem("whimssay_admin_ok") === "1"){ showPanel(); }
 
   function getExtra(){
-    try{ return JSON.parse(localStorage.getItem('whimssay_extra_products') || '[]'); }
+    try{ return JSON.parse(localStorage.getItem("whimssay_extra_products") || "[]"); }
     catch(e){ return []; }
   }
   function saveExtra(list){
-    localStorage.setItem('whimssay_extra_products', JSON.stringify(list));
+    localStorage.setItem("whimssay_extra_products", JSON.stringify(list));
   }
 
   function addProduct(){
-    const name = document.getElementById('pName').value.trim();
-    const price = parseInt(document.getElementById('pPrice').value, 10);
+    const name = document.getElementById("pName").value.trim();
+    const price = parseInt(document.getElementById("pPrice").value, 10);
     if(!name || !price){
-      alert('Isi minimal nama dan harga produk ya.');
+      alert("Isi minimal nama dan harga produk ya.");
       return;
     }
     const p = {
-      id: 'custom_' + Date.now(),
+      id: "custom_" + Date.now(),
       name,
-      name_en: document.getElementById('pNameEn').value.trim(),
-      desc: document.getElementById('pDesc').value.trim(),
-      desc_en: document.getElementById('pDescEn').value.trim(),
+      name_en: document.getElementById("pNameEn").value.trim(),
+      desc: document.getElementById("pDesc").value.trim(),
+      desc_en: document.getElementById("pDescEn").value.trim(),
       price,
-      icon: document.getElementById('pIcon').value.trim() || '🎀',
-      tag: document.getElementById('pTag').value.trim() || 'New',
-      tag_en: document.getElementById('pTag').value.trim() || 'New',
+      image: document.getElementById("pImage").value.trim(),
+      icon: document.getElementById("pIcon").value.trim() || "🎀",
+      tag: document.getElementById("pTag").value.trim(),
+      tag_en: document.getElementById("pTag").value.trim(),
     };
     const list = getExtra();
     list.push(p);
     saveExtra(list);
-    ['pName','pNameEn','pDesc','pDescEn','pPrice','pIcon','pTag'].forEach(id=>document.getElementById(id).value='');
+    ["pName","pNameEn","pDesc","pDescEn","pPrice","pIcon","pImage","pTag"].forEach(id=>document.getElementById(id).value="");
     renderList();
   }
 
@@ -185,7 +191,7 @@
   }
 
   function clearAll(){
-    if(confirm('Hapus semua produk tambahan yang tersimpan di browser ini?')){
+    if(confirm("Hapus semua produk tambahan yang tersimpan di browser ini?")){
       saveExtra([]);
       renderList();
     }
@@ -193,36 +199,41 @@
 
   function renderList(){
     const list = getExtra();
-    const el = document.getElementById('plist');
+    const el = document.getElementById("plist");
     if(list.length===0){
       el.innerHTML = '<p style="font-size:0.85rem; color:#8a8272;">Belum ada produk tambahan. Isi form di atas untuk menambah.</p>';
       return;
     }
-    el.innerHTML = list.map(p=>`
+    el.innerHTML = list.map(p=>{
+      const thumb = p.image ? `<img src="${p.image}" alt="">` : (p.icon || "🎀");
+      return `
       <div class="prow">
-        <div class="icon">${p.icon}</div>
-        <div class="info"><b>${p.name}</b> — Rp ${p.price.toLocaleString('id-ID')}</div>
+        <div class="thumb">${thumb}</div>
+        <div class="info"><b>${p.name}</b> — Rp ${p.price.toLocaleString("id-ID")}</div>
         <button onclick="removeProduct('${p.id}')">Hapus</button>
-      </div>`).join('');
+      </div>`;
+    }).join("");
   }
 
   function exportSnippet(){
     const list = getExtra();
-    const box = document.getElementById('snippetBox');
+    const box = document.getElementById("snippetBox");
     if(list.length===0){
-      alert('Belum ada produk untuk diekspor.');
+      alert("Belum ada produk untuk diekspor.");
       return;
     }
     const lines = list.map(p=>
-      `    {id:'${p.id}', name:'${esc(p.name)}', name_en:'${esc(p.name_en||p.name)}', desc:'${esc(p.desc)}', desc_en:'${esc(p.desc_en||p.desc)}', price:${p.price}, icon:'${p.icon}', tag:'${esc(p.tag)}', tag_en:'${esc(p.tag_en||p.tag)}'},`
+      `    {id:"${p.id}", name:"${esc(p.name)}", name_en:"${esc(p.name_en||p.name)}", desc:"${esc(p.desc)}", desc_en:"${esc(p.desc_en||p.desc)}", price:${p.price}, image:"${esc(p.image)}", icon:"${p.icon}", tag:"${esc(p.tag)}", tag_en:"${esc(p.tag_en||p.tag)}"},`
     );
-    box.value = lines.join('\n');
-    box.classList.remove('hidden');
+    box.value = lines.join("\n");
+    box.classList.remove("hidden");
     box.select();
-    try{ document.execCommand('copy'); }catch(e){}
+    try{ document.execCommand("copy"); }catch(e){}
   }
 
-  function esc(str){ return String(str||'').replace(/'/g, "\\'"); }
+  // escape double quotes and backslashes so the exported snippet stays valid JS
+  // (this format uses double-quoted strings so apostrophes like "don't" are safe)
+  function esc(str){ return String(str||"").replace(/\\/g, "\\\\").replace(/"/g, '\\"'); }
 </script>
 </body>
 </html>
