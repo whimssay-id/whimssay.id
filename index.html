@@ -33,8 +33,9 @@
 
   header{position:sticky; top:0; z-index:500; background:rgba(252,235,241,0.92); backdrop-filter:blur(6px); border-bottom:2px dashed var(--rose);}
   nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px; gap:12px;}
-  .logo{font-family:'Fraunces', serif; font-size:1.6rem; font-weight:700; color:var(--rose); letter-spacing:0.5px;}
+  .logo{font-family:'Fraunces', serif; font-size:1.6rem; font-weight:700; color:var(--rose); letter-spacing:0.5px; display:flex; align-items:center; gap:8px;}
   .logo span{color:var(--forest);}
+  .logo img{height:34px; width:auto; display:block;}
   .nav-links{display:flex; gap:26px; align-items:center; font-size:0.9rem; font-weight:500;}
   .nav-links a{position:relative; padding:4px 2px; transition:color 0.2s;}
   .nav-links a:hover{color:var(--rose);}
@@ -68,8 +69,9 @@
   .hero-cta{display:flex; gap:16px; margin-top:32px; flex-wrap:wrap;}
   .doodle{position:absolute; font-size:2rem; opacity:0.8; animation:float 6s ease-in-out infinite; user-select:none; pointer-events:none;}
   @keyframes float{0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-16px) rotate(8deg);}}
-  .hero-visual{position:relative; aspect-ratio:1/1; max-width:400px; margin:0 auto; background:var(--pink); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px var(--blush), 0 0 0 6px var(--rose);}
+  .hero-visual{position:relative; aspect-ratio:1/1; max-width:400px; margin:0 auto; background:var(--pink); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px var(--blush), 0 0 0 6px var(--rose); overflow:hidden;}
   .hero-visual .hoop-content{font-size:5.5rem;}
+  .hero-visual img.logo-img{width:70%; height:70%; object-fit:contain;}
   .hero-visual::before{content:'✂️'; position:absolute; top:8%; left:6%; font-size:1.8rem; transform:rotate(-15deg);}
   .hero-visual::after{content:'🧵'; position:absolute; bottom:10%; right:8%; font-size:1.8rem; transform:rotate(10deg);}
 
@@ -93,6 +95,7 @@
   .card-visual{height:170px; border-radius:16px; background:var(--pink); display:flex; align-items:center; justify-content:center; font-size:3.4rem; margin-bottom:16px; overflow:hidden;}
   .card-visual img{width:100%; height:100%; object-fit:cover;}
   .card-tag{position:absolute; top:16px; right:16px; background:var(--forest); color:var(--cream); font-size:0.68rem; font-weight:700; padding:4px 10px; border-radius:12px; transform:rotate(4deg); z-index:2;}
+  .card-tag:empty{display:none;}
   .card h3{font-size:1.15rem; color:var(--forest); margin-bottom:6px;}
   .card p.desc{font-size:0.86rem; color:#6b6355; margin-bottom:14px; min-height:38px;}
   .card-footer{display:flex; align-items:center; justify-content:space-between; gap:10px;}
@@ -166,7 +169,6 @@
   .cart-total{display:flex; justify-content:space-between; font-weight:600; color:var(--forest); margin-bottom:14px;}
   .cart-footer .btn{width:100%; justify-content:center;}
 
-  /* checkout modal */
   .modal-overlay{position:fixed; inset:0; background:rgba(60,54,48,0.5); z-index:1200; opacity:0; pointer-events:none; transition:opacity 0.3s; display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:40px 16px;}
   .modal-overlay.active{opacity:1; pointer-events:auto;}
   .modal-box{background:var(--blush); border-radius:22px; max-width:520px; width:100%; padding:30px; position:relative; margin:auto;}
@@ -180,6 +182,11 @@
   .pay-options{display:flex; gap:10px; margin-top:8px;}
   .pay-opt{flex:1; border:2px solid var(--sage); border-radius:14px; padding:12px; text-align:center; cursor:pointer; font-size:0.85rem; font-weight:600; color:var(--forest); transition:all 0.2s;}
   .pay-opt.active{border-color:var(--rose); background:var(--pink);}
+  .method-card{border:2px solid var(--sage); border-radius:16px; padding:18px; margin-bottom:14px; cursor:pointer; transition:all 0.2s;}
+  .method-card:hover{border-color:var(--rose);}
+  .method-card h4{color:var(--forest); font-size:1rem; margin-bottom:6px; display:flex; align-items:center; gap:8px;}
+  .method-card p{font-size:0.82rem; color:#6b6355; line-height:1.5;}
+  .method-card .fee-badge{display:inline-block; background:var(--pink); color:var(--rose); font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px; margin-left:6px;}
   .checkout-summary{background:#fff; border-radius:14px; padding:14px 16px; margin-top:16px; font-size:0.85rem;}
   .checkout-summary .row{display:flex; justify-content:space-between; margin-bottom:6px;}
   .checkout-summary .row.total{font-weight:700; color:var(--forest); border-top:1px dashed var(--sage); padding-top:8px; margin-top:8px;}
@@ -190,6 +197,7 @@
   .pay-block img{border-radius:10px; margin-top:8px; max-width:220px;}
   .success-actions{display:flex; flex-direction:column; gap:10px; margin-top:18px;}
   .success-actions .btn{width:100%; justify-content:center;}
+  .back-link{font-size:0.8rem; color:var(--rose); cursor:pointer; display:inline-block; margin-bottom:12px;}
 
   .toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--forest); color:var(--cream); padding:12px 22px; border-radius:30px; font-size:0.88rem; z-index:1000; opacity:0; transition:all 0.3s; pointer-events:none;}
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
@@ -217,7 +225,7 @@
 
 <header>
   <nav class="wrap">
-    <div class="logo">whim<span>ssay</span></div>
+    <div class="logo" id="navLogo">whim<span>ssay</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#beranda" data-i18n="nav_home">Beranda</a></li>
       <li><a href="#tentang" data-i18n="nav_about">Tentang</a></li>
@@ -255,7 +263,7 @@
         <a href="#tentang" class="btn btn-outline" data-i18n="hero_cta2">Kenalan dulu yuk</a>
       </div>
     </div>
-    <div class="hero-visual"><div class="hoop-content">🧸🌷</div></div>
+    <div class="hero-visual" id="heroVisual"><div class="hoop-content">🧸🌷</div></div>
   </div>
 </section>
 <div class="scallop-bottom" style="--edge-color:var(--blush); background-color:var(--cream);"></div>
@@ -289,7 +297,6 @@
       <p data-i18n="shop_sub">Semua item ready stock terbatas — begitu habis, nunggu batch berikutnya ya, sayang!</p>
     </div>
     <div class="product-grid" id="productGrid"></div>
-    <p class="sample-note" data-i18n="sample_note">🌱 Ini contoh produk — admin bisa ganti foto & isi lewat halaman Developer.</p>
   </div>
 </section>
 <div class="scallop-bottom" style="--edge-color:var(--sage-light); background-color:var(--blush);"></div>
@@ -310,13 +317,13 @@
       </div>
       <div class="step">
         <div class="num">02</div>
-        <h4 data-i18n="step2_h">Isi data pengiriman</h4>
-        <p data-i18n="step2_p">Klik "Checkout Sekarang", isi nama, alamat, dan no. telepon. Ongkir estimasi J&T langsung terhitung.</p>
+        <h4 data-i18n="step2_h">Pilih metode checkout</h4>
+        <p data-i18n="step2_p">Lewat Website (isi alamat, ongkir otomatis dihitung) atau lewat WhatsApp ala Shopee (ada tambahan biaya admin 20%).</p>
       </div>
       <div class="step">
         <div class="num">03</div>
         <h4 data-i18n="step3_h">Bayar & lacak paket</h4>
-        <p data-i18n="step3_p">Pilih bayar QRIS (Rp) atau PayPal ($). Pesanan otomatis kami terima, lalu kamu bisa lacak status pengiriman di bagian Lacak Pesanan.</p>
+        <p data-i18n="step3_p">Bayar via QRIS (Rp) atau PayPal ($). Pesanan otomatis kami terima, lalu kamu bisa lacak status pengiriman di bagian Lacak Pesanan.</p>
       </div>
     </div>
     <div class="payment-note">
@@ -436,182 +443,203 @@
 <div class="toast" id="toast" data-i18n="toast_added">Ditambahkan ke keranjang 💌</div>
 
 <script>
-  /* ============ CONFIG — edit these before/after deploying ============ */
-  const WA_NUMBER = '6285706023066';               // admin WhatsApp (checkout fallback + contact form)
-  const ADMIN_EMAIL = 'whimssayid@gmail.com';
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID'; // see README
-  const PAYPAL_USERNAME = 'paypal.me/whimssayid';             // your paypal.me username — replace with the real one
-  const QRIS_IMAGE = 'qris.png';                            // e.g. 'qris.jpg' if you upload your static QRIS image to the repo
-  const USD_RATE = 20000;                           // approximate fixed IDR-per-USD rate, update as needed
+  /* ============================================================
+     CONFIG — edit these values, then re-upload index.html to GitHub.
+     ⚠️ If you type text with an apostrophe (don't, it's, kids') inside
+     the quotes below, make sure it's wrapped in DOUBLE quotes " "
+     like the examples already here — a stray ' inside single quotes
+     will break the ENTIRE site (that's what happened last time).
+  ============================================================ */
+  const WA_NUMBER = "6285706023066";                // admin WhatsApp
+  const ADMIN_EMAIL = "whimssayid@gmail.com";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID"; // see README
+  const PAYPAL_USERNAME = "whimssayid";              // just your paypal.me username, NOT the full link
+  const QRIS_IMAGE = "qris.png";                     // static QRIS image filename, upload it next to index.html
+  const LOGO_IMAGE = "";                             // e.g. "logo.png" — upload your logo to the repo and put its filename here
+  const USD_RATE = 25000;                            // approximate fixed IDR-per-USD rate, update as needed
+  const WA_ADMIN_FEE_PERCENT = 20;                   // extra % charged when ordering via WhatsApp/Shopee-style checkout
 
   const shippingZones = {
-    jabodetabek:{label_id:'Jabodetabek', label_en:'Jabodetabek (Jakarta area)', rate:18000},
-    jawa:{label_id:'Jawa (luar Jabodetabek)', label_en:'Java (outside Jabodetabek)', rate:12000},
-    sumatera:{label_id:'Sumatera', label_en:'Sumatra', rate:25000},
-    kalisulteng:{label_id:'Kalimantan / Sulawesi', label_en:'Kalimantan / Sulawesi', rate:30000},
-    timur:{label_id:'Indonesia Timur & lainnya', label_en:'Eastern Indonesia & others', rate:38000},
+    jabodetabek:{label_id:"Jabodetabek", label_en:"Jabodetabek (Jakarta area)", rate:18000},
+    jawa:{label_id:"Jawa (luar Jabodetabek)", label_en:"Java (outside Jabodetabek)", rate:12000},
+    sumatera:{label_id:"Sumatera", label_en:"Sumatra", rate:25000},
+    kalisulteng:{label_id:"Kalimantan / Sulawesi", label_en:"Kalimantan / Sulawesi", rate:30000},
+    timur:{label_id:"Indonesia Timur & lainnya", label_en:"Eastern Indonesia & others", rate:38000},
   };
 
   /* ============ DEFAULT PRODUCTS ============
-     Two examples only — replace with your real products & photos via admin.html,
-     then paste the exported snippet here so every visitor sees them. */
+     Use DOUBLE quotes for name/desc text (safe with apostrophes like "don't").
+     Prices are plain whole numbers in Rupiah — e.g. 17000, never 17.000. */
   const defaultProducts = [
-    {id:'p1', name:'"Triple G" set', name_en:'"Triple G" set', desc:'Triple G Set adalah satu set berisi 3 button pin yang terinspirasi dari semangat girls support girls. Setiap pin mewakili bentuk kepedulian yang sederhana, namun bermakna; mulai dari menawarkan bantuan, berbagi kenyamanan, hingga mengingatkan bahwa kita tidak harus menghadapi semuanya sendirian.', desc_en:'Triple G Set is a collection of 3 illustrated button pins inspired by the spirit of girls supporting girls. Each pin represents a simple yet meaningful act of kindness; offering help, sharing comfort, or reminding someone that they don't have to go through things alone.', price:17.000, image:'TripleG.png', tag:'', tag_en:''},
+    {id:"p1", name:"\"Triple G\" Set", name_en:"\"Triple G\" Set", desc:"Satu set berisi 3 button pin bertema girls support girls — bentuk kepedulian sederhana namun bermakna.", desc_en:"A set of 3 illustrated button pins inspired by the spirit of girls supporting girls — a simple yet meaningful act of kindness.", price:17000, image:"TripleG.png", tag:"", tag_en:""},
   ];
 
   /* ============ i18n ============ */
   const translations = {
     id:{
-      nav_home:'Beranda', nav_about:'Tentang', nav_shop:'Koleksi', nav_how:'Cara Order', nav_track:'Lacak Pesanan', nav_contact:'Kontak',
-      hero_eyebrow:'✧ little whimsical things ✧',
-      hero_title:'Hal-hal kecil yang bikin hari kamu <em>lebih lucu</em>.',
-      hero_lead:'Whimssay adalah rumah bagi produk handmade bertema whimsical — dibuat perlahan, dengan tangan, dan sepenuh hati, khusus untuk kamu yang percaya hidup harus tetap manis dan menggemaskan.',
-      hero_cta1:'🛍️ Lihat Koleksi', hero_cta2:'Kenalan dulu yuk',
-      about_eyebrow:'tentang kami',
-      about_title:'Dibuat dengan tangan, ditemani secangkir teh, dan playlist yang manis-manis.',
-      about_p1:'Whimssay lahir dari kecintaan pada hal-hal kecil yang sering terlewat — pita yang menggantung lucu di tas, jepit rambut mutiara, atau tote bag yang bikin senyum tiap kali dipakai. Semua produk kami dibuat handmade dalam batch kecil, jadi setiap item punya karakter dan keunikannya sendiri.',
-      about_p2:'Kami percaya "whimsical" bukan cuma soal tampilan gemas, tapi juga soal perasaan hangat yang dibawanya. Setiap pesanan dikemas rapi dan penuh cinta, siap menemani hari-harimu yang playful.',
-      value1:'🧵 100% Handmade', value2:'🌿 Small Batch', value3:'💌 Dibungkus Penuh Cinta', value4:'🎀 Ready & Pre-Order',
-      shop_eyebrow:'koleksi kami', shop_title:'Pilih favoritmu, langsung masukin keranjang',
-      shop_sub:'Semua item ready stock terbatas — begitu habis, nunggu batch berikutnya ya, sayang!',
-      sample_note:'🌱 Ini contoh produk — admin bisa ganti foto & isi lewat halaman Developer.',
-      how_eyebrow:'gampang kok', how_title:'Cara order di Whimssay',
-      how_sub:'Order, isi alamat, dan bayar — semuanya langsung dari website ini.',
-      step1_h:'Pilih & tambahkan produk', step1_p:'Klik tombol + pada produk favoritmu di bagian Koleksi, atur jumlahnya di keranjang.',
-      step2_h:'Isi data pengiriman', step2_p:'Klik "Checkout Sekarang", isi nama, alamat, dan no. telepon. Ongkir estimasi J&T langsung terhitung.',
-      step3_h:'Bayar & lacak paket', step3_p:'Pilih bayar QRIS (Rp) atau PayPal ($). Pesanan otomatis kami terima, lalu kamu bisa lacak status pengiriman di bagian Lacak Pesanan.',
-      payment_note:'<strong>Pembayaran:</strong> QRIS (Rupiah) atau PayPal (USD), pilih saat checkout.<br><strong>Pengiriman:</strong> J&T Express, ongkir yang muncul saat checkout adalah estimasi berdasarkan wilayah — nominal final dikonfirmasi admin sebelum paket dikirim.',
-      testi_eyebrow:'kata mereka', testi_title:'Cerita dari pelanggan Whimssay',
-      testi_soon:'Belum ada testimoni — toko ini baru dibuka! Jadilah pelanggan pertama yang cerita pengalamannya di sini.',
-      track_eyebrow:'lacak pesanan', track_title:'Cek status pesanan & paketmu',
-      track_sub:'Simpan Order ID yang kamu dapat setelah checkout ya, biar gampang dicek lagi.',
-      track_order_h:'Cek status pesanan', track_order_p:'Masukkan Order ID kamu (contoh: WMS-ABC123). Ini akan mencari data di perangkat yang sama saat kamu checkout.',
-      track_order_btn:'Cek Sekarang',
-      track_jnt_h:'Lacak paket J&T', track_jnt_p:'Setelah paketmu dikirim, admin akan mengirim nomor resi J&T lewat WhatsApp/email. Tempel nomor resi itu di sini, lalu lacak langsung di situs resmi J&T.',
-      track_jnt_btn:'Lacak di J&T',
-      track_not_found:'Order ID tidak ditemukan di perangkat ini. Kalau kamu checkout dari HP lain, hubungi admin via WhatsApp untuk cek status ya.',
-      track_status_label:'Status', track_items_label:'Item',
-      contact_eyebrow:'hubungi kami', contact_title:'Yuk ngobrol dulu sama Whimssay',
-      contact_sub:'Tanya-tanya produk, request custom, atau sekadar say hi — kami senang dengar dari kamu.',
-      social_h:'Sosial media',
-      contact_info:'WhatsApp: +62 857-0602-3066<br>Email: whimssayid@gmail.com<br>Instagram &amp; TikTok: @whimssay.id<br>Jam operasional: Senin–Sabtu, 09.00–20.00 WIB',
-      form_name:'Nama', form_name_ph:'Nama kamu', form_contact:'Email / No. HP', form_contact_ph:'Buat kami balas kamu',
-      form_msg:'Pesan', form_msg_ph:'Mau tanya apa nih?', form_submit:'Kirim via WhatsApp',
-      footer_tag:'whimsical handmade things, made for the girlies ✨', footer_dev:'Developer',
-      cart_title:'Keranjang Kamu', cart_total:'Total', cart_checkout:'Checkout Sekarang',
-      toast_added:'Ditambahkan ke keranjang 💌', empty_cart:'Keranjang masih kosong ✨<br>Yuk pilih produk favoritmu!',
-      // checkout modal
-      co_title:'Checkout', co_sub:'Isi data pengiriman kamu di bawah ini.',
-      co_name:'Nama Lengkap', co_phone:'No. WhatsApp / Telepon', co_address:'Alamat Lengkap (jalan, RT/RW, kelurahan)',
-      co_city:'Kota / Kabupaten', co_zone:'Wilayah Pengiriman', co_postal:'Kode Pos (opsional)', co_note:'Catatan (opsional)',
-      co_payment:'Metode Pembayaran', co_pay_idr:'Rp — QRIS', co_pay_usd:'$ — PayPal',
-      co_subtotal:'Subtotal', co_shipping:'Ongkir (estimasi)', co_total:'Total',
-      co_submit:'Kirim Pesanan', co_required:'Lengkapi nama, telepon, alamat, kota, dan wilayah pengiriman ya.',
-      co_success_title:'Pesanan diterima! 💌', co_order_id_label:'Order ID kamu',
-      co_success_note:'Simpan Order ID ini untuk cek status pesanan nanti.',
-      co_pay_idr_block:'Silakan scan QRIS di bawah untuk membayar <b>{total}</b>. Kalau QRIS belum tampil, admin akan mengirimkannya lewat WhatsApp/email.',
-      co_pay_usd_block:'Klik tombol di bawah untuk membayar <b>{total}</b> lewat PayPal.',
-      co_pay_paypal_btn:'Bayar via PayPal', co_wa_confirm:'Konfirmasi via WhatsApp', co_close:'Tutup',
-      co_email_note:'Detail pesanan juga sudah kami coba kirim ke email admin.',
+      nav_home:"Beranda", nav_about:"Tentang", nav_shop:"Koleksi", nav_how:"Cara Order", nav_track:"Lacak Pesanan", nav_contact:"Kontak",
+      hero_eyebrow:"✧ little whimsical things ✧",
+      hero_title:"Hal-hal kecil yang bikin hari kamu <em>lebih lucu</em>.",
+      hero_lead:"Whimssay adalah rumah bagi produk handmade bertema whimsical — dibuat perlahan, dengan tangan, dan sepenuh hati, khusus untuk kamu yang percaya hidup harus tetap manis dan menggemaskan.",
+      hero_cta1:"🛍️ Lihat Koleksi", hero_cta2:"Kenalan dulu yuk",
+      about_eyebrow:"tentang kami",
+      about_title:"Dibuat dengan tangan, ditemani secangkir teh, dan playlist yang manis-manis.",
+      about_p1:"Whimssay lahir dari kecintaan pada hal-hal kecil yang sering terlewat — pita yang menggantung lucu di tas, jepit rambut mutiara, atau tote bag yang bikin senyum tiap kali dipakai. Semua produk kami dibuat handmade dalam batch kecil, jadi setiap item punya karakter dan keunikannya sendiri.",
+      about_p2:"Kami percaya \"whimsical\" bukan cuma soal tampilan gemas, tapi juga soal perasaan hangat yang dibawanya. Setiap pesanan dikemas rapi dan penuh cinta, siap menemani hari-harimu yang playful.",
+      value1:"🧵 100% Handmade", value2:"🌿 Small Batch", value3:"💌 Dibungkus Penuh Cinta", value4:"🎀 Ready & Pre-Order",
+      shop_eyebrow:"koleksi kami", shop_title:"Pilih favoritmu, langsung masukin keranjang",
+      shop_sub:"Semua item ready stock terbatas — begitu habis, nunggu batch berikutnya ya, sayang!",
+      how_eyebrow:"gampang kok", how_title:"Cara order di Whimssay",
+      how_sub:"Order, isi alamat, dan bayar — semuanya langsung dari website ini.",
+      step1_h:"Pilih & tambahkan produk", step1_p:"Klik tombol + pada produk favoritmu di bagian Koleksi, atur jumlahnya di keranjang.",
+      step2_h:"Pilih metode checkout", step2_p:"Lewat Website (isi alamat, ongkir otomatis dihitung) atau lewat WhatsApp ala Shopee (ada tambahan biaya admin 20%).",
+      step3_h:"Bayar & lacak paket", step3_p:"Bayar via QRIS (Rp) atau PayPal ($). Pesanan otomatis kami terima, lalu kamu bisa lacak status pengiriman di bagian Lacak Pesanan.",
+      payment_note:"<strong>Pembayaran:</strong> QRIS (Rupiah) atau PayPal (USD), pilih saat checkout.<br><strong>Pengiriman:</strong> J&T Express, ongkir yang muncul saat checkout adalah estimasi berdasarkan wilayah — nominal final dikonfirmasi admin sebelum paket dikirim.",
+      testi_eyebrow:"kata mereka", testi_title:"Cerita dari pelanggan Whimssay",
+      testi_soon:"Belum ada testimoni — toko ini baru dibuka! Jadilah pelanggan pertama yang cerita pengalamannya di sini.",
+      track_eyebrow:"lacak pesanan", track_title:"Cek status pesanan & paketmu",
+      track_sub:"Simpan Order ID yang kamu dapat setelah checkout ya, biar gampang dicek lagi.",
+      track_order_h:"Cek status pesanan", track_order_p:"Masukkan Order ID kamu (contoh: WMS-ABC123). Ini akan mencari data di perangkat yang sama saat kamu checkout.",
+      track_order_btn:"Cek Sekarang",
+      track_jnt_h:"Lacak paket J&T", track_jnt_p:"Setelah paketmu dikirim, admin akan mengirim nomor resi J&T lewat WhatsApp/email. Tempel nomor resi itu di sini, lalu lacak langsung di situs resmi J&T.",
+      track_jnt_btn:"Lacak di J&T",
+      track_not_found:"Order ID tidak ditemukan di perangkat ini. Kalau kamu checkout dari HP lain, hubungi admin via WhatsApp untuk cek status ya.",
+      track_status_label:"Status", track_items_label:"Item",
+      contact_eyebrow:"hubungi kami", contact_title:"Yuk ngobrol dulu sama Whimssay",
+      contact_sub:"Tanya-tanya produk, request custom, atau sekadar say hi — kami senang dengar dari kamu.",
+      social_h:"Sosial media",
+      contact_info:"WhatsApp: +62 857-0602-3066<br>Email: whimssayid@gmail.com<br>Instagram &amp; TikTok: @whimssay.id<br>Jam operasional: Senin–Sabtu, 09.00–20.00 WIB",
+      form_name:"Nama", form_name_ph:"Nama kamu", form_contact:"Email / No. HP", form_contact_ph:"Buat kami balas kamu",
+      form_msg:"Pesan", form_msg_ph:"Mau tanya apa nih?", form_submit:"Kirim via WhatsApp",
+      footer_tag:"whimsical handmade things, made for the girlies ✨", footer_dev:"Developer",
+      cart_title:"Keranjang Kamu", cart_total:"Total", cart_checkout:"Checkout Sekarang",
+      toast_added:"Ditambahkan ke keranjang 💌", empty_cart:"Keranjang masih kosong ✨<br>Yuk pilih produk favoritmu!",
+      // checkout — method step
+      co_method_title:"Checkout", co_method_sub:"Mau pesan lewat mana?",
+      co_method_web_h:"🌐 Checkout via Website", co_method_web_p:"Isi alamat langsung di sini, ongkir J&T estimasi otomatis dihitung, bayar QRIS/PayPal. Tanpa biaya tambahan.",
+      co_method_wa_h:"💬 Checkout via WhatsApp", co_method_wa_p:"Diproses seperti pesanan lewat Shopee — admin bantu susunkan pesananmu manual via chat. Ada tambahan biaya admin.",
+      // checkout — web form
+      co_title:"Checkout", co_sub:"Isi data pengiriman kamu di bawah ini.",
+      co_name:"Nama Lengkap", co_phone:"No. WhatsApp / Telepon", co_address:"Alamat Lengkap (jalan, RT/RW, kelurahan)",
+      co_city:"Kota / Kabupaten", co_zone:"Wilayah Pengiriman", co_postal:"Kode Pos (opsional)", co_note:"Catatan (opsional)",
+      co_payment:"Metode Pembayaran", co_pay_idr:"Rp — QRIS", co_pay_usd:"$ — PayPal",
+      co_subtotal:"Subtotal", co_shipping:"Ongkir (estimasi)", co_total:"Total",
+      co_submit:"Kirim Pesanan", co_required:"Lengkapi nama, telepon, alamat, kota, dan wilayah pengiriman ya.",
+      co_success_title:"Pesanan diterima! 💌", co_order_id_label:"Order ID kamu",
+      co_success_note:"Simpan Order ID ini untuk cek status pesanan nanti.",
+      co_pay_idr_block:"Silakan scan QRIS di bawah untuk membayar <b>{total}</b>. Kalau QRIS belum tampil, admin akan mengirimkannya lewat WhatsApp/email.",
+      co_pay_usd_block:"Klik tombol di bawah untuk membayar <b>{total}</b> lewat PayPal.",
+      co_pay_paypal_btn:"Bayar via PayPal", co_wa_confirm:"Konfirmasi via WhatsApp", co_close:"Tutup",
+      co_email_note:"Detail pesanan juga sudah kami coba kirim ke email admin.",
+      co_back:"← Ganti metode checkout",
+      // checkout — wa/shopee form
+      wa_title:"Checkout via WhatsApp", wa_sub:"Pesananmu diproses manual oleh admin, mirip alur belanja di Shopee.",
+      wa_fee_note:"Metode ini otomatis kena biaya admin +{pct}% dari subtotal produk. Ongkir akan dihitung terpisah dan diinfokan admin sesuai alamatmu.",
+      wa_subtotal:"Subtotal produk", wa_fee:"Biaya admin ({pct}%)", wa_total:"Total (belum termasuk ongkir)",
+      wa_submit:"Lanjut ke WhatsApp",
     },
     en:{
-      nav_home:'Home', nav_about:'About', nav_shop:'Shop', nav_how:'How to Order', nav_track:'Track Order', nav_contact:'Contact',
-      hero_eyebrow:'✧ little whimsical things ✧',
-      hero_title:'Little things that make your day <em>a bit more cute</em>.',
-      hero_lead:'Whimssay is home to whimsical handmade goods — made slowly, by hand, with heart, for anyone who believes life should stay sweet and a little silly.',
-      hero_cta1:'🛍️ Shop the Collection', hero_cta2:'Get to know us',
-      about_eyebrow:'about us',
-      about_title:'Made by hand, with a cup of tea, and the sweetest playlist.',
-      about_p1:'Whimssay was born from a love of small things that often get overlooked — a cute ribbon dangling off a bag, pearl hair clips, or a tote that makes you smile every time you carry it. Every product is handmade in small batches, so each piece has its own character.',
-      about_p2:'We believe "whimsical" isn\'t just about looking cute — it\'s about the warm feeling it brings. Every order is packed neatly and with love, ready to join your playful days.',
-      value1:'🧵 100% Handmade', value2:'🌿 Small Batch', value3:'💌 Wrapped With Love', value4:'🎀 Ready & Pre-Order',
-      shop_eyebrow:'our collection', shop_title:'Pick your favorite, add it straight to cart',
-      shop_sub:'All items are limited ready stock — once they\'re gone, you\'ll have to wait for the next batch!',
-      sample_note:'🌱 These are example products — the admin can swap in real photos via the Developer page.',
-      how_eyebrow:'it\'s easy', how_title:'How to order from Whimssay',
-      how_sub:'Order, fill in your address, and pay — all right on this website.',
-      step1_h:'Pick & add products', step1_p:'Tap the + button on your favorite items in the Shop section, adjust quantity in the cart.',
-      step2_h:'Fill in shipping details', step2_p:'Tap "Checkout Now", enter your name, address, and phone number. The estimated J&T shipping cost is calculated instantly.',
-      step3_h:'Pay & track your parcel', step3_p:'Pay via QRIS (IDR) or PayPal (USD). Your order is received automatically, then you can track shipping status in the Track Order section.',
-      payment_note:'<strong>Payment:</strong> QRIS (IDR) or PayPal (USD), chosen at checkout.<br><strong>Shipping:</strong> J&T Express — the shipping fee shown at checkout is a regional estimate, the final amount is confirmed by admin before the package ships.',
-      testi_eyebrow:'what they say', testi_title:'Stories from Whimssay customers',
-      testi_soon:'No reviews yet — the shop just opened! Be the first customer to share your experience here.',
-      track_eyebrow:'track order', track_title:'Check your order & parcel status',
-      track_sub:'Save the Order ID you get after checkout so it\'s easy to look up later.',
-      track_order_h:'Check order status', track_order_p:'Enter your Order ID (e.g. WMS-ABC123). This looks up data on the same device you used to check out.',
-      track_order_btn:'Check Now',
-      track_jnt_h:'Track your J&T parcel', track_jnt_p:'Once your parcel ships, admin will send you the J&T waybill number via WhatsApp/email. Paste it here, then track it directly on J&T\'s official site.',
-      track_jnt_btn:'Track on J&T',
-      track_not_found:'Order ID not found on this device. If you checked out from another phone, contact admin via WhatsApp to check status.',
-      track_status_label:'Status', track_items_label:'Items',
-      contact_eyebrow:'get in touch', contact_title:'Let\'s chat with Whimssay',
-      contact_sub:'Ask about products, request a custom order, or just say hi — we love hearing from you.',
-      social_h:'Social media',
-      contact_info:'WhatsApp: +62 857-0602-3066<br>Email: whimssayid@gmail.com<br>Instagram &amp; TikTok: @whimssay.id<br>Hours: Mon–Sat, 09:00–20:00 WIB',
-      form_name:'Name', form_name_ph:'Your name', form_contact:'Email / Phone', form_contact_ph:'So we can reply to you',
-      form_msg:'Message', form_msg_ph:'What would you like to ask?', form_submit:'Send via WhatsApp',
-      footer_tag:'whimsical handmade things, made for the girlies ✨', footer_dev:'Developer',
-      cart_title:'Your Cart', cart_total:'Total', cart_checkout:'Checkout Now',
-      toast_added:'Added to cart 💌', empty_cart:'Your cart is empty ✨<br>Go pick your favorites!',
-      co_title:'Checkout', co_sub:'Fill in your shipping details below.',
-      co_name:'Full Name', co_phone:'WhatsApp / Phone Number', co_address:'Full Address (street, RT/RW, subdistrict)',
-      co_city:'City / Regency', co_zone:'Shipping Region', co_postal:'Postal Code (optional)', co_note:'Note (optional)',
-      co_payment:'Payment Method', co_pay_idr:'Rp — QRIS', co_pay_usd:'$ — PayPal',
-      co_subtotal:'Subtotal', co_shipping:'Shipping (estimate)', co_total:'Total',
-      co_submit:'Place Order', co_required:'Please fill in name, phone, address, city, and shipping region.',
-      co_success_title:'Order received! 💌', co_order_id_label:'Your Order ID',
-      co_success_note:'Save this Order ID to check your order status later.',
-      co_pay_idr_block:'Please scan the QRIS below to pay <b>{total}</b>. If no QRIS shows yet, admin will send it via WhatsApp/email.',
-      co_pay_usd_block:'Tap the button below to pay <b>{total}</b> via PayPal.',
-      co_pay_paypal_btn:'Pay via PayPal', co_wa_confirm:'Confirm via WhatsApp', co_close:'Close',
-      co_email_note:'We\'ve also tried sending the order details to admin\'s email.',
+      nav_home:"Home", nav_about:"About", nav_shop:"Shop", nav_how:"How to Order", nav_track:"Track Order", nav_contact:"Contact",
+      hero_eyebrow:"✧ little whimsical things ✧",
+      hero_title:"Little things that make your day <em>a bit more cute</em>.",
+      hero_lead:"Whimssay is home to whimsical handmade goods — made slowly, by hand, with heart, for anyone who believes life should stay sweet and a little silly.",
+      hero_cta1:"🛍️ Shop the Collection", hero_cta2:"Get to know us",
+      about_eyebrow:"about us",
+      about_title:"Made by hand, with a cup of tea, and the sweetest playlist.",
+      about_p1:"Whimssay was born from a love of small things that often get overlooked — a cute ribbon dangling off a bag, pearl hair clips, or a tote that makes you smile every time you carry it. Every product is handmade in small batches, so each piece has its own character.",
+      about_p2:"We believe \"whimsical\" isn't just about looking cute — it's about the warm feeling it brings. Every order is packed neatly and with love, ready to join your playful days.",
+      value1:"🧵 100% Handmade", value2:"🌿 Small Batch", value3:"💌 Wrapped With Love", value4:"🎀 Ready & Pre-Order",
+      shop_eyebrow:"our collection", shop_title:"Pick your favorite, add it straight to cart",
+      shop_sub:"All items are limited ready stock — once they're gone, you'll have to wait for the next batch!",
+      how_eyebrow:"it's easy", how_title:"How to order from Whimssay",
+      how_sub:"Order, fill in your address, and pay — all right on this website.",
+      step1_h:"Pick & add products", step1_p:"Tap the + button on your favorite items in the Shop section, adjust quantity in the cart.",
+      step2_h:"Choose a checkout method", step2_p:"Via Website (fill in your address, shipping is auto-estimated) or via WhatsApp, Shopee-style (a 20% admin fee applies).",
+      step3_h:"Pay & track your parcel", step3_p:"Pay via QRIS (IDR) or PayPal (USD). Your order is received automatically, then you can track shipping status in the Track Order section.",
+      payment_note:"<strong>Payment:</strong> QRIS (IDR) or PayPal (USD), chosen at checkout.<br><strong>Shipping:</strong> J&T Express — the shipping fee shown at checkout is a regional estimate, the final amount is confirmed by admin before the package ships.",
+      testi_eyebrow:"what they say", testi_title:"Stories from Whimssay customers",
+      testi_soon:"No reviews yet — the shop just opened! Be the first customer to share your experience here.",
+      track_eyebrow:"track order", track_title:"Check your order & parcel status",
+      track_sub:"Save the Order ID you get after checkout so it's easy to look up later.",
+      track_order_h:"Check order status", track_order_p:"Enter your Order ID (e.g. WMS-ABC123). This looks up data on the same device you used to check out.",
+      track_order_btn:"Check Now",
+      track_jnt_h:"Track your J&T parcel", track_jnt_p:"Once your parcel ships, admin will send you the J&T waybill number via WhatsApp/email. Paste it here, then track it directly on J&T's official site.",
+      track_jnt_btn:"Track on J&T",
+      track_not_found:"Order ID not found on this device. If you checked out from another phone, contact admin via WhatsApp to check status.",
+      track_status_label:"Status", track_items_label:"Items",
+      contact_eyebrow:"get in touch", contact_title:"Let's chat with Whimssay",
+      contact_sub:"Ask about products, request a custom order, or just say hi — we love hearing from you.",
+      social_h:"Social media",
+      contact_info:"WhatsApp: +62 857-0602-3066<br>Email: whimssayid@gmail.com<br>Instagram &amp; TikTok: @whimssay.id<br>Hours: Mon–Sat, 09:00–20:00 WIB",
+      form_name:"Name", form_name_ph:"Your name", form_contact:"Email / Phone", form_contact_ph:"So we can reply to you",
+      form_msg:"Message", form_msg_ph:"What would you like to ask?", form_submit:"Send via WhatsApp",
+      footer_tag:"whimsical handmade things, made for the girlies ✨", footer_dev:"Developer",
+      cart_title:"Your Cart", cart_total:"Total", cart_checkout:"Checkout Now",
+      toast_added:"Added to cart 💌", empty_cart:"Your cart is empty ✨<br>Go pick your favorites!",
+      co_method_title:"Checkout", co_method_sub:"How would you like to order?",
+      co_method_web_h:"🌐 Checkout via Website", co_method_web_p:"Fill in your address right here, estimated J&T shipping is calculated automatically, pay via QRIS/PayPal. No extra fee.",
+      co_method_wa_h:"💬 Checkout via WhatsApp", co_method_wa_p:"Handled like a Shopee-style order — admin puts your order together manually over chat. An admin fee applies.",
+      co_title:"Checkout", co_sub:"Fill in your shipping details below.",
+      co_name:"Full Name", co_phone:"WhatsApp / Phone Number", co_address:"Full Address (street, RT/RW, subdistrict)",
+      co_city:"City / Regency", co_zone:"Shipping Region", co_postal:"Postal Code (optional)", co_note:"Note (optional)",
+      co_payment:"Payment Method", co_pay_idr:"Rp — QRIS", co_pay_usd:"$ — PayPal",
+      co_subtotal:"Subtotal", co_shipping:"Shipping (estimate)", co_total:"Total",
+      co_submit:"Place Order", co_required:"Please fill in name, phone, address, city, and shipping region.",
+      co_success_title:"Order received! 💌", co_order_id_label:"Your Order ID",
+      co_success_note:"Save this Order ID to check your order status later.",
+      co_pay_idr_block:"Please scan the QRIS below to pay <b>{total}</b>. If no QRIS shows yet, admin will send it via WhatsApp/email.",
+      co_pay_usd_block:"Tap the button below to pay <b>{total}</b> via PayPal.",
+      co_pay_paypal_btn:"Pay via PayPal", co_wa_confirm:"Confirm via WhatsApp", co_close:"Close",
+      co_email_note:"We've also tried sending the order details to admin's email.",
+      co_back:"← Change checkout method",
+      wa_title:"Checkout via WhatsApp", wa_sub:"Your order is handled manually by admin, similar to shopping on Shopee.",
+      wa_fee_note:"This method automatically adds a +{pct}% admin fee on the product subtotal. Shipping is calculated separately and shared by admin based on your address.",
+      wa_subtotal:"Product subtotal", wa_fee:"Admin fee ({pct}%)", wa_total:"Total (shipping not included yet)",
+      wa_submit:"Continue on WhatsApp",
     }
   };
 
-  let currentLang = localStorage.getItem('whimssay_lang') || 'id';
+  let currentLang = localStorage.getItem("whimssay_lang") || "id";
   function t(key){ return (translations[currentLang] && translations[currentLang][key]) ?? key; }
 
   function applyStaticText(){
-    document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = t(el.getAttribute('data-i18n')); });
-    document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML = t(el.getAttribute('data-i18n-html')); });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder'))); });
-    document.getElementById('htmlRoot').lang = currentLang;
-    document.getElementById('langID').classList.toggle('active', currentLang==='id');
-    document.getElementById('langEN').classList.toggle('active', currentLang==='en');
+    document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.getAttribute("data-i18n")); });
+    document.querySelectorAll("[data-i18n-html]").forEach(el=>{ el.innerHTML = t(el.getAttribute("data-i18n-html")); });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{ el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder"))); });
+    document.getElementById("htmlRoot").lang = currentLang;
+    document.getElementById("langID").classList.toggle("active", currentLang==="id");
+    document.getElementById("langEN").classList.toggle("active", currentLang==="en");
   }
   function setLang(lang){
     currentLang = lang;
-    localStorage.setItem('whimssay_lang', lang);
+    localStorage.setItem("whimssay_lang", lang);
     applyStaticText();
     renderProducts();
     renderCart();
-    populateZoneOptions();
   }
 
-  /* ============ price helpers (Rp & USD shown together) ============ */
-  function fmtIDR(n){ return 'Rp ' + Math.round(n).toLocaleString('id-ID'); }
-  function fmtUSD(n){ return '$' + (n / USD_RATE).toFixed(2); }
+  function fmtIDR(n){ return "Rp " + Math.round(n).toLocaleString("id-ID"); }
+  function fmtUSD(n){ return "$" + (n / USD_RATE).toFixed(2); }
   function fmtDual(n){ return `${fmtIDR(n)} <small>${fmtUSD(n)}</small>`; }
 
-  /* ============ merge admin-added products (same browser only — see admin.html) ============ */
   function getAllProducts(){
     let extra = [];
-    try{ extra = JSON.parse(localStorage.getItem('whimssay_extra_products') || '[]'); }catch(e){ extra = []; }
+    try{ extra = JSON.parse(localStorage.getItem("whimssay_extra_products") || "[]"); }catch(e){ extra = []; }
     return [...defaultProducts, ...extra];
   }
-  function localName(p){ return currentLang==='en' ? (p.name_en || p.name) : p.name; }
-  function localDesc(p){ return currentLang==='en' ? (p.desc_en || p.desc) : p.desc; }
-  function localTag(p){ return currentLang==='en' ? (p.tag_en || p.tag) : p.tag; }
+  function localName(p){ return currentLang==="en" ? (p.name_en || p.name) : p.name; }
+  function localDesc(p){ return currentLang==="en" ? (p.desc_en || p.desc) : p.desc; }
+  function localTag(p){ return currentLang==="en" ? (p.tag_en || p.tag) : p.tag; }
 
   function renderProducts(){
-    const grid = document.getElementById('productGrid');
-    grid.innerHTML = '';
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = "";
     getAllProducts().forEach(p=>{
       const visual = p.image
         ? `<img src="${p.image}" alt="${localName(p)}" loading="lazy">`
-        : (p.icon || '🎀');
-      const card = document.createElement('div');
-      card.className='card';
+        : (p.icon || "🎀");
+      const card = document.createElement("div");
+      card.className="card";
       card.innerHTML = `
         <span class="card-tag">${localTag(p)}</span>
         <div class="card-visual">${visual}</div>
@@ -623,6 +651,13 @@
         </div>`;
       grid.appendChild(card);
     });
+  }
+
+  function renderLogo(){
+    const heroVisual = document.getElementById("heroVisual");
+    if(LOGO_IMAGE){
+      heroVisual.innerHTML = `<img class="logo-img" src="${LOGO_IMAGE}" alt="Whimssay logo">`;
+    }
   }
 
   let cart = {};
@@ -646,19 +681,19 @@
     },0);
   }
   function renderCart(){
-    const itemsEl = document.getElementById('cartItems');
+    const itemsEl = document.getElementById("cartItems");
     const all = getAllProducts();
     const ids = Object.keys(cart);
     let count=0;
     if(ids.length===0){
-      itemsEl.innerHTML = `<div class="empty-cart">${t('empty_cart')}</div>`;
+      itemsEl.innerHTML = `<div class="empty-cart">${t("empty_cart")}</div>`;
     } else {
       itemsEl.innerHTML = ids.map(id=>{
         const p = all.find(x=>x.id===id);
-        if(!p) return '';
+        if(!p) return "";
         const qty = cart[id];
         count += qty;
-        const thumb = p.image ? `<img src="${p.image}" alt="">` : (p.icon || '🎀');
+        const thumb = p.image ? `<img src="${p.image}" alt="">` : (p.icon || "🎀");
         return `<div class="cart-item">
           <div class="ci-icon">${thumb}</div>
           <div class="ci-info">
@@ -671,115 +706,133 @@
             <button onclick="changeQty('${id}',1)">+</button>
           </div>
         </div>`;
-      }).join('');
+      }).join("");
     }
-    document.getElementById('cartBadge').textContent = count;
-    document.getElementById('cartTotal').innerHTML = fmtDual(cartSubtotal());
+    document.getElementById("cartBadge").textContent = count;
+    document.getElementById("cartTotal").innerHTML = fmtDual(cartSubtotal());
   }
 
   function toggleCart(open){
-    document.getElementById('cartDrawer').classList.toggle('active', open);
-    document.getElementById('overlay').classList.toggle('active', open);
+    document.getElementById("cartDrawer").classList.toggle("active", open);
+    document.getElementById("overlay").classList.toggle("active", open);
   }
   function showToast(){
-    const tEl = document.getElementById('toast');
-    tEl.textContent = t('toast_added');
-    tEl.classList.add('show');
+    const tEl = document.getElementById("toast");
+    tEl.textContent = t("toast_added");
+    tEl.classList.add("show");
     clearTimeout(window._toastTimer);
-    window._toastTimer = setTimeout(()=>tEl.classList.remove('show'), 1800);
+    window._toastTimer = setTimeout(()=>tEl.classList.remove("show"), 1800);
   }
 
-  /* ============ checkout modal ============ */
+  /* ============ checkout ============ */
   function populateZoneOptions(sel){
-    const select = sel || document.getElementById('coZone');
+    const select = sel || document.getElementById("coZone");
     if(!select) return;
     const current = select.value;
-    select.innerHTML = '<option value="">--</option>' + Object.entries(shippingZones).map(([key,z])=>
-      `<option value="${key}">${currentLang==='en'?z.label_en:z.label_id} — ${fmtIDR(z.rate)}</option>`
-    ).join('');
+    select.innerHTML = "<option value=\"\">--</option>" + Object.entries(shippingZones).map(([key,z])=>
+      `<option value="${key}">${currentLang==="en"?z.label_en:z.label_id} — ${fmtIDR(z.rate)}</option>`
+    ).join("");
     if(current) select.value = current;
   }
 
   function openCheckout(){
     if(Object.keys(cart).length===0){
-      alert(currentLang==='en' ? 'Your cart is empty — pick a product first ✨' : 'Keranjang kamu masih kosong, yuk pilih produk dulu ✨');
+      alert(currentLang==="en" ? "Your cart is empty — pick a product first ✨" : "Keranjang kamu masih kosong, yuk pilih produk dulu ✨");
       return;
     }
-    renderCheckoutForm();
-    document.getElementById('checkoutOverlay').classList.add('active');
+    renderMethodStep();
+    document.getElementById("checkoutOverlay").classList.add("active");
     toggleCart(false);
   }
   function closeCheckout(){
-    document.getElementById('checkoutOverlay').classList.remove('active');
+    document.getElementById("checkoutOverlay").classList.remove("active");
+  }
+
+  function renderMethodStep(){
+    const box = document.getElementById("checkoutBox");
+    box.innerHTML = `
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <h3>${t("co_method_title")}</h3>
+      <p class="sub">${t("co_method_sub")}</p>
+      <div class="method-card" onclick="renderCheckoutForm()">
+        <h4>${t("co_method_web_h")}</h4>
+        <p>${t("co_method_web_p")}</p>
+      </div>
+      <div class="method-card" onclick="renderWaForm()">
+        <h4>${t("co_method_wa_h")} <span class="fee-badge">+${WA_ADMIN_FEE_PERCENT}%</span></h4>
+        <p>${t("co_method_wa_p")}</p>
+      </div>
+    `;
   }
 
   function renderCheckoutForm(){
-    const box = document.getElementById('checkoutBox');
+    const box = document.getElementById("checkoutBox");
     box.innerHTML = `
       <button class="modal-close" onclick="closeCheckout()">✕</button>
-      <h3>${t('co_title')}</h3>
-      <p class="sub">${t('co_sub')}</p>
-      <label>${t('co_name')}</label>
+      <span class="back-link" onclick="renderMethodStep()">${t("co_back")}</span>
+      <h3>${t("co_title")}</h3>
+      <p class="sub">${t("co_sub")}</p>
+      <label>${t("co_name")}</label>
       <input type="text" id="coName">
-      <label>${t('co_phone')}</label>
+      <label>${t("co_phone")}</label>
       <input type="tel" id="coPhone">
-      <label>${t('co_address')}</label>
+      <label>${t("co_address")}</label>
       <textarea id="coAddress"></textarea>
-      <label>${t('co_city')}</label>
+      <label>${t("co_city")}</label>
       <input type="text" id="coCity">
-      <label>${t('co_zone')}</label>
+      <label>${t("co_zone")}</label>
       <select id="coZone" onchange="updateCheckoutSummary()"></select>
-      <label>${t('co_postal')}</label>
+      <label>${t("co_postal")}</label>
       <input type="text" id="coPostal">
-      <label>${t('co_note')}</label>
+      <label>${t("co_note")}</label>
       <textarea id="coNote"></textarea>
-      <label>${t('co_payment')}</label>
+      <label>${t("co_payment")}</label>
       <div class="pay-options">
-        <div class="pay-opt active" id="payOptIDR" onclick="setPayMethod('IDR')">${t('co_pay_idr')}</div>
-        <div class="pay-opt" id="payOptUSD" onclick="setPayMethod('USD')">${t('co_pay_usd')}</div>
+        <div class="pay-opt active" id="payOptIDR" onclick="setPayMethod('IDR')">${t("co_pay_idr")}</div>
+        <div class="pay-opt" id="payOptUSD" onclick="setPayMethod('USD')">${t("co_pay_usd")}</div>
       </div>
       <div class="checkout-summary" id="checkoutSummary"></div>
-      <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitCheckout()">${t('co_submit')}</button>
+      <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitCheckout()">${t("co_submit")}</button>
     `;
-    populateZoneOptions(document.getElementById('coZone'));
-    window._payMethod = 'IDR';
+    populateZoneOptions(document.getElementById("coZone"));
+    window._payMethod = "IDR";
     updateCheckoutSummary();
   }
 
   function setPayMethod(method){
     window._payMethod = method;
-    document.getElementById('payOptIDR').classList.toggle('active', method==='IDR');
-    document.getElementById('payOptUSD').classList.toggle('active', method==='USD');
+    document.getElementById("payOptIDR").classList.toggle("active", method==="IDR");
+    document.getElementById("payOptUSD").classList.toggle("active", method==="USD");
     updateCheckoutSummary();
   }
 
   function updateCheckoutSummary(){
-    const zoneKey = document.getElementById('coZone').value;
+    const zoneKey = document.getElementById("coZone").value;
     const zone = shippingZones[zoneKey];
     const subtotal = cartSubtotal();
     const shipping = zone ? zone.rate : 0;
     const total = subtotal + shipping;
-    const method = window._payMethod || 'IDR';
-    const fmt = method==='USD' ? fmtUSD : fmtIDR;
-    document.getElementById('checkoutSummary').innerHTML = `
-      <div class="row"><span>${t('co_subtotal')}</span><span>${fmt(subtotal)}</span></div>
-      <div class="row"><span>${t('co_shipping')}</span><span>${zone ? fmt(shipping) : '—'}</span></div>
-      <div class="row total"><span>${t('co_total')}</span><span>${fmt(total)}</span></div>
+    const method = window._payMethod || "IDR";
+    const fmt = method==="USD" ? fmtUSD : fmtIDR;
+    document.getElementById("checkoutSummary").innerHTML = `
+      <div class="row"><span>${t("co_subtotal")}</span><span>${fmt(subtotal)}</span></div>
+      <div class="row"><span>${t("co_shipping")}</span><span>${zone ? fmt(shipping) : "—"}</span></div>
+      <div class="row total"><span>${t("co_total")}</span><span>${fmt(total)}</span></div>
     `;
   }
 
   function submitCheckout(){
-    const name = document.getElementById('coName').value.trim();
-    const phone = document.getElementById('coPhone').value.trim();
-    const address = document.getElementById('coAddress').value.trim();
-    const city = document.getElementById('coCity').value.trim();
-    const zoneKey = document.getElementById('coZone').value;
-    const postal = document.getElementById('coPostal').value.trim();
-    const note = document.getElementById('coNote').value.trim();
-    const method = window._payMethod || 'IDR';
+    const name = document.getElementById("coName").value.trim();
+    const phone = document.getElementById("coPhone").value.trim();
+    const address = document.getElementById("coAddress").value.trim();
+    const city = document.getElementById("coCity").value.trim();
+    const zoneKey = document.getElementById("coZone").value;
+    const postal = document.getElementById("coPostal").value.trim();
+    const note = document.getElementById("coNote").value.trim();
+    const method = window._payMethod || "IDR";
 
     if(!name || !phone || !address || !city || !zoneKey){
-      alert(t('co_required'));
+      alert(t("co_required"));
       return;
     }
     const zone = shippingZones[zoneKey];
@@ -792,30 +845,28 @@
     const shipping = zone.rate;
     const totalIDR = subtotal + shipping;
 
-    const orderId = 'WMS-' + Date.now().toString(36).toUpperCase();
+    const orderId = "WMS-" + Date.now().toString(36).toUpperCase();
     const order = {
-      id: orderId, createdAt: new Date().toISOString(), status: 'Menunggu Konfirmasi',
-      customer:{name, phone, address, city, zone: currentLang==='en'?zone.label_en:zone.label_id, postal, note},
+      id: orderId, createdAt: new Date().toISOString(), status: "Menunggu Konfirmasi", channel:"web",
+      customer:{name, phone, address, city, zone: currentLang==="en"?zone.label_en:zone.label_id, postal, note},
       items, subtotalIDR, shippingIDR: shipping, totalIDR, paymentMethod: method,
     };
 
-    // save locally so the buyer can look it up again on this device
     try{
-      const orders = JSON.parse(localStorage.getItem('whimssay_orders') || '[]');
+      const orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]");
       orders.push(order);
-      localStorage.setItem('whimssay_orders', JSON.stringify(orders));
+      localStorage.setItem("whimssay_orders", JSON.stringify(orders));
     }catch(e){}
 
-    // best-effort email notification via Formspree
     let emailAttempted = false;
-    if(FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes('REPLACE_WITH_YOUR_FORM_ID')){
+    if(FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes("REPLACE_WITH_YOUR_FORM_ID")){
       emailAttempted = true;
       fetch(FORMSPREE_ENDPOINT, {
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
         body: JSON.stringify({
           orderId, name, phone, address, city, zone: order.customer.zone, postal, note,
-          items: items.map(i=>`${i.name} x${i.qty} (${fmtIDR(i.price*i.qty)})`).join(' | '),
+          items: items.map(i=>`${i.name} x${i.qty} (${fmtIDR(i.price*i.qty)})`).join(" | "),
           subtotal: fmtIDR(subtotal), shipping: fmtIDR(shipping), total: fmtIDR(totalIDR), paymentMethod: method,
         })
       }).catch(()=>{});
@@ -825,39 +876,85 @@
   }
 
   function renderCheckoutSuccess(order, emailAttempted){
-    const box = document.getElementById('checkoutBox');
-    const total = order.paymentMethod==='USD' ? fmtUSD(order.totalIDR) : fmtIDR(order.totalIDR);
+    const box = document.getElementById("checkoutBox");
+    const total = order.paymentMethod==="USD" ? fmtUSD(order.totalIDR) : fmtIDR(order.totalIDR);
 
-    let payBlock = '';
-    if(order.paymentMethod==='IDR'){
-      const qrisImg = QRIS_IMAGE ? `<img src="${QRIS_IMAGE}" alt="QRIS">` : '';
-      payBlock = `<div class="pay-block">${t('co_pay_idr_block').replace('{total}', total)}${qrisImg}</div>`;
+    let payBlock = "";
+    if(order.paymentMethod==="IDR"){
+      const qrisImg = QRIS_IMAGE ? `<img src="${QRIS_IMAGE}" alt="QRIS">` : "";
+      payBlock = `<div class="pay-block">${t("co_pay_idr_block").replace("{total}", total)}${qrisImg}</div>`;
     } else {
-      const paypalUrl = `https://paypal.me/${PAYPAL_USERNAME}/${(order.totalIDR/USD_RATE).toFixed(2)}USD`;
-      payBlock = `<div class="pay-block">${t('co_pay_usd_block').replace('{total}', total)}
-        <div style="margin-top:12px;"><a href="${paypalUrl}" target="_blank" rel="noopener" class="btn btn-sage" style="width:100%; justify-content:center;">${t('co_pay_paypal_btn')}</a></div>
+      const cleanUsername = PAYPAL_USERNAME.replace(/^.*paypal\.me\//i, "").replace(/^@/, "");
+      const paypalUrl = `https://paypal.me/${cleanUsername}/${(order.totalIDR/USD_RATE).toFixed(2)}USD`;
+      payBlock = `<div class="pay-block">${t("co_pay_usd_block").replace("{total}", total)}
+        <div style="margin-top:12px;"><a href="${paypalUrl}" target="_blank" rel="noopener" class="btn btn-sage" style="width:100%; justify-content:center;">${t("co_pay_paypal_btn")}</a></div>
       </div>`;
     }
 
-    const itemsSummary = order.items.map(i=>`- ${i.name} x${i.qty}`).join('%0A');
-    const waMsg = `${currentLang==='en' ? 'Hi Whimssay! Order' : 'Halo Whimssay! Pesanan'} ${order.id}:%0A${itemsSummary}%0A${currentLang==='en'?'Total':'Total'}: ${fmtIDR(order.totalIDR)}%0A${currentLang==='en'?'Name':'Nama'}: ${order.customer.name}%0A${currentLang==='en'?'Address':'Alamat'}: ${order.customer.address}, ${order.customer.city}%0A${currentLang==='en'?'Phone':'Telepon'}: ${order.customer.phone}`;
-    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(decodeURIComponent(waMsg.replace(/%0A/g,'\n')))}`;
+    const itemsSummary = order.items.map(i=>`- ${i.name} x${i.qty}`).join("\n");
+    const waMsgRaw = `${currentLang==="en" ? "Hi Whimssay! Order" : "Halo Whimssay! Pesanan"} ${order.id}:\n${itemsSummary}\n${currentLang==="en"?"Total":"Total"}: ${fmtIDR(order.totalIDR)}\n${currentLang==="en"?"Name":"Nama"}: ${order.customer.name}\n${currentLang==="en"?"Address":"Alamat"}: ${order.customer.address}, ${order.customer.city}\n${currentLang==="en"?"Phone":"Telepon"}: ${order.customer.phone}`;
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsgRaw)}`;
 
     box.innerHTML = `
       <button class="modal-close" onclick="closeCheckout()">✕</button>
       <div class="success-box">
         <div class="emoji">🎀</div>
-        <h3>${t('co_success_title')}</h3>
+        <h3>${t("co_success_title")}</h3>
         <div class="order-id-chip">${order.id}</div>
-        <p class="sub">${t('co_success_note')}</p>
+        <p class="sub">${t("co_success_note")}</p>
         ${payBlock}
-        ${emailAttempted ? `<p class="sub" style="margin-top:10px;">${t('co_email_note')}</p>` : ''}
+        ${emailAttempted ? `<p class="sub" style="margin-top:10px;">${t("co_email_note")}</p>` : ""}
         <div class="success-actions">
-          <a class="btn btn-outline" href="${waUrl}" target="_blank" rel="noopener">${t('co_wa_confirm')}</a>
-          <button class="btn btn-primary" onclick="finishCheckout()">${t('co_close')}</button>
+          <a class="btn btn-outline" href="${waUrl}" target="_blank" rel="noopener">${t("co_wa_confirm")}</a>
+          <button class="btn btn-primary" onclick="finishCheckout()">${t("co_close")}</button>
         </div>
       </div>
     `;
+  }
+
+  /* ============ WhatsApp / Shopee-style checkout (+ admin fee) ============ */
+  function renderWaForm(){
+    const box = document.getElementById("checkoutBox");
+    const subtotal = cartSubtotal();
+    const fee = subtotal * (WA_ADMIN_FEE_PERCENT/100);
+    const total = subtotal + fee;
+    box.innerHTML = `
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <span class="back-link" onclick="renderMethodStep()">${t("co_back")}</span>
+      <h3>${t("wa_title")}</h3>
+      <p class="sub">${t("wa_sub")}</p>
+      <div class="pay-block">${t("wa_fee_note").replace("{pct}", WA_ADMIN_FEE_PERCENT)}</div>
+      <div class="checkout-summary">
+        <div class="row"><span>${t("wa_subtotal")}</span><span>${fmtDual(subtotal)}</span></div>
+        <div class="row"><span>${t("wa_fee").replace("{pct}", WA_ADMIN_FEE_PERCENT)}</span><span>${fmtDual(fee)}</span></div>
+        <div class="row total"><span>${t("wa_total")}</span><span>${fmtDual(total)}</span></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitWaCheckout(${subtotal}, ${fee}, ${total})">${t("wa_submit")}</button>
+    `;
+  }
+
+  function submitWaCheckout(subtotal, fee, total){
+    const all = getAllProducts();
+    const items = Object.keys(cart).map(id=>{
+      const p = all.find(x=>x.id===id);
+      return p ? {id, name:localName(p), qty:cart[id], price:p.price} : null;
+    }).filter(Boolean);
+    const orderId = "WMS-" + Date.now().toString(36).toUpperCase();
+
+    try{
+      const orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]");
+      orders.push({id:orderId, createdAt:new Date().toISOString(), status:"Menunggu Konfirmasi (WA)", channel:"whatsapp", items, subtotalIDR:subtotal, feeIDR:fee, totalIDR:total});
+      localStorage.setItem("whimssay_orders", JSON.stringify(orders));
+    }catch(e){}
+
+    const itemsSummary = items.map(i=>`- ${i.name} x${i.qty}`).join("\n");
+    const label = currentLang==="en" ? "Order" : "Pesanan";
+    const totalLabel = currentLang==="en" ? "Total (with admin fee, shipping not included)" : "Total (sudah + biaya admin, ongkir belum termasuk)";
+    const waMsgRaw = `${currentLang==="en" ? "Hi Whimssay! I'd like to order via WhatsApp" : "Halo Whimssay! Aku mau order lewat WhatsApp"} (${orderId}):\n${itemsSummary}\n${totalLabel}: ${fmtIDR(total)}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsgRaw)}`, "_blank");
+    cart = {};
+    renderCart();
+    closeCheckout();
   }
 
   function finishCheckout(){
@@ -868,43 +965,44 @@
 
   /* ============ tracking ============ */
   function lookupOrder(){
-    const idVal = document.getElementById('trackOrderId').value.trim().toUpperCase();
-    const resultEl = document.getElementById('trackOrderResult');
+    const idVal = document.getElementById("trackOrderId").value.trim().toUpperCase();
+    const resultEl = document.getElementById("trackOrderResult");
     if(!idVal){ return; }
     let orders = [];
-    try{ orders = JSON.parse(localStorage.getItem('whimssay_orders') || '[]'); }catch(e){}
+    try{ orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]"); }catch(e){}
     const found = orders.find(o=>o.id.toUpperCase()===idVal);
     if(!found){
-      resultEl.innerHTML = t('track_not_found');
-      resultEl.classList.add('show');
+      resultEl.innerHTML = t("track_not_found");
+      resultEl.classList.add("show");
       return;
     }
     resultEl.innerHTML = `
-      <b>${t('track_status_label')}:</b> ${found.status}<br>
-      <b>${t('track_items_label')}:</b> ${found.items.map(i=>`${i.name} x${i.qty}`).join(', ')}<br>
-      <b>${t('co_total')}:</b> ${fmtIDR(found.totalIDR)}
+      <b>${t("track_status_label")}:</b> ${found.status}<br>
+      <b>${t("track_items_label")}:</b> ${found.items.map(i=>`${i.name} x${i.qty}`).join(", ")}<br>
+      <b>${t("co_total")}:</b> ${fmtIDR(found.totalIDR)}
     `;
-    resultEl.classList.add('show');
+    resultEl.classList.add("show");
   }
   function trackJnt(){
-    window.open('https://jet.co.id/track', '_blank');
+    window.open("https://jet.co.id/track", "_blank");
   }
 
-  document.getElementById('contactForm').addEventListener('submit', function(e){
+  document.getElementById("contactForm").addEventListener("submit", function(e){
     e.preventDefault();
-    const name = document.getElementById('cname').value;
-    const contact = document.getElementById('cemail').value;
-    const message = document.getElementById('cmsg').value;
+    const name = document.getElementById("cname").value;
+    const contact = document.getElementById("cemail").value;
+    const message = document.getElementById("cmsg").value;
     const msg = `Halo Whimssay! Aku ${name} (${contact}).\n\n${message}`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   });
 
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.addEventListener('click', ()=> document.getElementById('navLinks').classList.remove('open'));
+  document.querySelectorAll(".nav-links a").forEach(a=>{
+    a.addEventListener("click", ()=> document.getElementById("navLinks").classList.remove("open"));
   });
 
   // init
   applyStaticText();
+  renderLogo();
   renderProducts();
   renderCart();
 </script>
