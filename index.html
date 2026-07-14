@@ -455,13 +455,15 @@
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID"; // see README
   const PAYPAL_USERNAME = "whimssayid";              // just your paypal.me username, NOT the full link
   const QRIS_IMAGE = "qris.png";                     // static QRIS image filename, upload it next to index.html
-  const LOGO_IMAGE = "";                             // e.g. "logo.png" — upload your logo to the repo and put its filename here
-  const USD_RATE = 30000;                            // approximate fixed IDR-per-USD rate, update as needed
+  const LOGO_IMAGE = "logo.png";                      // your logo filename — upload logo.png to the repo (same folder as index.html)
+  const USD_RATE = 8000;                              // deliberately lower than the real ~15,800/USD market rate, so USD
+                                                       // prices come out roughly 2x a fair conversion (e.g. Rp17,000 → ~$2.13
+                                                       // instead of ~$1.08). Lower this number = pricier USD. Adjust to taste.
   const WA_ADMIN_FEE_PERCENT = 20;                   // extra % charged when ordering via WhatsApp/Shopee-style checkout
 
   const shippingZones = {
-    jabodetabek:{label_id:"Jabodetabek", label_en:"Jabodetabek (Jakarta area)", rate:18000},
-    jawa:{label_id:"Jawa (luar Jabodetabek)", label_en:"Java (outside Jabodetabek)", rate:12000},
+    jabodetabek:{label_id:"Jabodetabek", label_en:"Jabodetabek (Jakarta area)", rate:12000},
+    jawa:{label_id:"Jawa (luar Jabodetabek)", label_en:"Java (outside Jabodetabek)", rate:18000},
     sumatera:{label_id:"Sumatera", label_en:"Sumatra", rate:25000},
     kalisulteng:{label_id:"Kalimantan / Sulawesi", label_en:"Kalimantan / Sulawesi", rate:30000},
     timur:{label_id:"Indonesia Timur & lainnya", label_en:"Eastern Indonesia & others", rate:38000},
@@ -472,7 +474,6 @@
      Prices are plain whole numbers in Rupiah — e.g. 17000, never 17.000. */
   const defaultProducts = [
     {id:"p1", name:"\"Triple G\" Set", name_en:"\"Triple G\" Set", desc:"Satu set berisi 3 button pin bertema girls support girls — bentuk kepedulian sederhana namun bermakna.", desc_en:"A set of 3 illustrated button pins inspired by the spirit of girls supporting girls — a simple yet meaningful act of kindness.", price:17000, image:"TripleG.png", tag:"", tag_en:""},
-    {id:"custom_1784025721282", name:"TripleG Set", name_en:"TripleG Set", desc:"Triple G Set adalah satu set berisi 3 button pin yang terinspirasi dari semangat girls support girls. Setiap pin mewakili bentuk kepedulian yang sederhana, namun bermakna; mulai dari menawarkan bantuan, berbagi kenyamanan, hingga mengingatkan bahwa kita tidak harus menghadapi semuanya sendirian.", desc_en:"Triple G Set is a collection of 3 illustrated button pins inspired by the spirit of girls supporting girls. Each pin represents a simple yet meaningful act of kindness; offering help, sharing comfort, or reminding someone that they don't have to go through things alone.", price:17000, image:"TripleG.png", icon:"🎀", tag:"", tag_en:""},
   ];
 
   /* ============ i18n ============ */
@@ -793,6 +794,7 @@
         <div class="pay-opt" id="payOptUSD" onclick="setPayMethod('USD')">${t("co_pay_usd")}</div>
       </div>
       <div class="checkout-summary" id="checkoutSummary"></div>
+      <p class="err" id="coFormError" style="display:none; color:#b23b3b; font-size:0.82rem; margin-top:10px;"></p>
       <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:18px;" onclick="submitCheckout()">${t("co_submit")}</button>
     `;
     populateZoneOptions(document.getElementById("coZone"));
@@ -823,6 +825,9 @@
   }
 
   function submitCheckout(){
+    const errEl = document.getElementById("coFormError");
+    if(errEl){ errEl.style.display = "none"; }
+
     const name = document.getElementById("coName").value.trim();
     const phone = document.getElementById("coPhone").value.trim();
     const address = document.getElementById("coAddress").value.trim();
@@ -833,47 +838,74 @@
     const method = window._payMethod || "IDR";
 
     if(!name || !phone || !address || !city || !zoneKey){
-      alert(t("co_required"));
+      if(errEl){ errEl.textContent = t("co_required"); errEl.style.display = "block"; }
+      else{ alert(t("co_required")); }
       return;
     }
-    const zone = shippingZones[zoneKey];
-    const all = getAllProducts();
-    const items = Object.keys(cart).map(id=>{
-      const p = all.find(x=>x.id===id);
-      return p ? {id, name:localName(p), qty:cart[id], price:p.price} : null;
-    }).filter(Boolean);
-    const subtotal = cartSubtotal();
-    const shipping = zone.rate;
-    const totalIDR = subtotal + shipping;
-
-    const orderId = "WMS-" + Date.now().toString(36).toUpperCase();
-    const order = {
-      id: orderId, createdAt: new Date().toISOString(), status: "Menunggu Konfirmasi", channel:"web",
-      customer:{name, phone, address, city, zone: currentLang==="en"?zone.label_en:zone.label_id, postal, note},
-      items, subtotalIDR, shippingIDR: shipping, totalIDR, paymentMethod: method,
-    };
 
     try{
-      const orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]");
-      orders.push(order);
-      localStorage.setItem("whimssay_orders", JSON.stringify(orders));
-    }catch(e){}
+      const zone = shippingZones[zoneKey];
+      const all = getAllProducts();
+      const items = Object.keys(cart).map(id=>{
+        const p = all.find(x=>x.id===id);
+        return p ? {id, name:localName(p), qty:cart[id], price:p.price} : null;
+      }).filter(Boolean);
+      const subtotal = cartSubtotal();
+      const shipping = zone.rate;
+      const totalIDR = subtotal + shipping;
 
-    let emailAttempted = false;
-    if(FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes("REPLACE_WITH_YOUR_FORM_ID")){
-      emailAttempted = true;
-      fetch(FORMSPREE_ENDPOINT, {
-        method:"POST",
-        headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body: JSON.stringify({
-          orderId, name, phone, address, city, zone: order.customer.zone, postal, note,
-          items: items.map(i=>`${i.name} x${i.qty} (${fmtIDR(i.price*i.qty)})`).join(" | "),
-          subtotal: fmtIDR(subtotal), shipping: fmtIDR(shipping), total: fmtIDR(totalIDR), paymentMethod: method,
-        })
-      }).catch(()=>{});
+      const orderId = "WMS-" + Date.now().toString(36).toUpperCase();
+      const order = {
+        id: orderId, createdAt: new Date().toISOString(), status: "Menunggu Konfirmasi", channel:"web",
+        customer:{name, phone, address, city, zone: currentLang==="en"?zone.label_en:zone.label_id, postal, note},
+        items, subtotalIDR, shippingIDR: shipping, totalIDR, paymentMethod: method,
+      };
+
+      try{
+        const orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]");
+        orders.push(order);
+        localStorage.setItem("whimssay_orders", JSON.stringify(orders));
+      }catch(e){}
+
+      let emailAttempted = false;
+      if(FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes("REPLACE_WITH_YOUR_FORM_ID")){
+        emailAttempted = true;
+        fetch(FORMSPREE_ENDPOINT, {
+          method:"POST",
+          headers:{"Content-Type":"application/json","Accept":"application/json"},
+          body: JSON.stringify({
+            orderId, name, phone, address, city, zone: order.customer.zone, postal, note,
+            items: items.map(i=>`${i.name} x${i.qty} (${fmtIDR(i.price*i.qty)})`).join(" | "),
+            subtotal: fmtIDR(subtotal), shipping: fmtIDR(shipping), total: fmtIDR(totalIDR), paymentMethod: method,
+          })
+        }).catch(()=>{});
+      }
+
+      renderCheckoutSuccess(order, emailAttempted);
+    }catch(err){
+      console.error("Whimssay checkout error:", err);
+      renderCheckoutError(name, phone, address, city);
     }
+  }
 
-    renderCheckoutSuccess(order, emailAttempted);
+  function renderCheckoutError(name, phone, address, city){
+    const box = document.getElementById("checkoutBox");
+    const waMsgRaw = `${currentLang==="en" ? "Hi Whimssay! I tried to order on the website but hit an error. My details" : "Halo Whimssay! Aku coba order di web tapi ada error. Data aku"}:\nNama/Name: ${name}\nTelepon/Phone: ${phone}\nAlamat/Address: ${address}, ${city}`;
+    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsgRaw)}`;
+    const msg = currentLang==="en"
+      ? "Something went wrong placing your order automatically. Please tap below to send your order directly via WhatsApp instead — nothing was lost."
+      : "Ada kendala teknis saat memproses pesananmu otomatis. Silakan tap tombol di bawah untuk kirim pesananmu langsung lewat WhatsApp — datamu gak hilang kok.";
+    box.innerHTML = `
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      <div class="success-box">
+        <div class="emoji">⚠️</div>
+        <h3>${currentLang==="en" ? "Oops!" : "Ups!"}</h3>
+        <p class="sub">${msg}</p>
+        <div class="success-actions">
+          <a class="btn btn-primary" href="${waUrl}" target="_blank" rel="noopener">${t("co_wa_confirm")}</a>
+        </div>
+      </div>
+    `;
   }
 
   function renderCheckoutSuccess(order, emailAttempted){
@@ -935,27 +967,32 @@
   }
 
   function submitWaCheckout(subtotal, fee, total){
-    const all = getAllProducts();
-    const items = Object.keys(cart).map(id=>{
-      const p = all.find(x=>x.id===id);
-      return p ? {id, name:localName(p), qty:cart[id], price:p.price} : null;
-    }).filter(Boolean);
-    const orderId = "WMS-" + Date.now().toString(36).toUpperCase();
-
     try{
-      const orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]");
-      orders.push({id:orderId, createdAt:new Date().toISOString(), status:"Menunggu Konfirmasi (WA)", channel:"whatsapp", items, subtotalIDR:subtotal, feeIDR:fee, totalIDR:total});
-      localStorage.setItem("whimssay_orders", JSON.stringify(orders));
-    }catch(e){}
+      const all = getAllProducts();
+      const items = Object.keys(cart).map(id=>{
+        const p = all.find(x=>x.id===id);
+        return p ? {id, name:localName(p), qty:cart[id], price:p.price} : null;
+      }).filter(Boolean);
+      const orderId = "WMS-" + Date.now().toString(36).toUpperCase();
 
-    const itemsSummary = items.map(i=>`- ${i.name} x${i.qty}`).join("\n");
-    const label = currentLang==="en" ? "Order" : "Pesanan";
-    const totalLabel = currentLang==="en" ? "Total (with admin fee, shipping not included)" : "Total (sudah + biaya admin, ongkir belum termasuk)";
-    const waMsgRaw = `${currentLang==="en" ? "Hi Whimssay! I'd like to order via WhatsApp" : "Halo Whimssay! Aku mau order lewat WhatsApp"} (${orderId}):\n${itemsSummary}\n${totalLabel}: ${fmtIDR(total)}`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsgRaw)}`, "_blank");
-    cart = {};
-    renderCart();
-    closeCheckout();
+      try{
+        const orders = JSON.parse(localStorage.getItem("whimssay_orders") || "[]");
+        orders.push({id:orderId, createdAt:new Date().toISOString(), status:"Menunggu Konfirmasi (WA)", channel:"whatsapp", items, subtotalIDR:subtotal, feeIDR:fee, totalIDR:total});
+        localStorage.setItem("whimssay_orders", JSON.stringify(orders));
+      }catch(e){}
+
+      const itemsSummary = items.map(i=>`- ${i.name} x${i.qty}`).join("\n");
+      const label = currentLang==="en" ? "Order" : "Pesanan";
+      const totalLabel = currentLang==="en" ? "Total (with admin fee, shipping not included)" : "Total (sudah + biaya admin, ongkir belum termasuk)";
+      const waMsgRaw = `${currentLang==="en" ? "Hi Whimssay! I'd like to order via WhatsApp" : "Halo Whimssay! Aku mau order lewat WhatsApp"} (${orderId}):\n${itemsSummary}\n${totalLabel}: ${fmtIDR(total)}`;
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsgRaw)}`, "_blank");
+      cart = {};
+      renderCart();
+      closeCheckout();
+    }catch(err){
+      console.error("Whimssay WA checkout error:", err);
+      renderCheckoutError("", "", "", "");
+    }
   }
 
   function finishCheckout(){
